@@ -1,0 +1,7 @@
+{   
+    
+    "mongoURI" : "mongodb+srv://root:root@cluster0.aaabz.mongodb.net/hexal",
+
+    "mongoURIx" : "mongodb://localhost/hexal",
+    "jwtSecret" : "jwtSecret"
+}
