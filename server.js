@@ -30,7 +30,7 @@ mongoose
     //         email:"hi123@gmail.com"
     //     }
     //     res.json(obj)
-    // });
+    // }); 
     // app.get("/course",(req,res)=>{
     //     res.render("")
     // })
