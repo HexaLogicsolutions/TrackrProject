@@ -34,7 +34,7 @@ const UserList = () => {
   useEffect(() => {
     console.log("UserList - Mount -");
 
-    let url = "https://my12app.herokuapp.com/api/users";
+    let url = "/api/groups";
 
     fetch(url)
       .then((response) => {
