@@ -21,19 +21,19 @@ mongoose
     .then(() => console.log('Database is connected...'))
     .catch(err => console.log('Database connection error : '+err))
 
-    app.get('/',(req,res)=>
-    {
-        // res.send('hello i am king hii');
-        var obj ={
-            id:"8",
-            name:"king",
-            email:"hi123@gmail.com"
-        }
-        res.json(obj)
-    });
-    app.get("/course",(req,res)=>{
-        res.render("")
-    })
+    // app.get('/',(req,res)=>
+    // {
+    //     // res.send('hello i am king hii');
+    //     var obj ={
+    //         id:"8",
+    //         name:"king",
+    //         email:"hi123@gmail.com"
+    //     }
+    //     res.json(obj)
+    // });
+    // app.get("/course",(req,res)=>{
+    //     res.render("")
+    // })
 
 // Routes
 app.use('/api/users', require('./routes/api/user'))
