@@ -101,7 +101,9 @@ const UserList = () => {
   const deleteUser = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
-    await axios.delete(`http://localhost:5000/api/users/${code}`);
+    // await axios.delete(`http://localhost:5000/api/users/${code}`);
+    
+    await axios.delete(contextType.dbUrl +`users/${code}`);
     loadUsers();
   };
 
