@@ -63,7 +63,7 @@ const ActionGroupList = () => {
   const deleteActionGroup = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
-    await axios.delete(`http://localhost:5000/api/actiongroup/${code}`);
+    await axios.delete(contextType.dbUrl +`actiongroup/${code}`);
     loadActionGroups();
   };
 

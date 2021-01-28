@@ -70,7 +70,7 @@ const WarehouseList = () => {
   const deletlocaitontype = async (code) => {
     console.log("in deleteLoacation " + code);
     setShowModal(false);
-    await axios.delete(`http://localhost:5000/api/warehouse/${code}`);
+    await axios.delete(contextType.dbUrl +`warehouse/${code}`);
     loadLocation();
   };
 

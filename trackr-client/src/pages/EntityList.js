@@ -157,7 +157,7 @@ const EntityList = () => {
   const deleteEntity = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
-    await axios.delete(`http://localhost:5000/api/entity/${code}`);
+    await axios.delete(contextType.dbUrl +`entity/${code}`);
     loadEntity();
   };
 

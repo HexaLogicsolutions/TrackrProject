@@ -96,7 +96,7 @@ const EntitySubTypeList = () => {
   const deleteEntitySubType = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
-    await axios.delete(`http://localhost:5000/api/entitysubtype/${code}`);
+    await axios.delete(contextType.dbUrl +`entitysubtype/${code}`);
     loadEntitySubType();
   };
 

@@ -70,7 +70,7 @@ const EntityTypeList = () => {
   const deleteentitytype = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
-    await axios.delete(`http://localhost:5000/api/entitytype/${code}`);
+    await axios.delete(contextType.dbUrl +`entitytype/${code}`);
     loadGroups();
   };
 
