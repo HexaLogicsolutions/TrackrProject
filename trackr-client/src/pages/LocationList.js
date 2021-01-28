@@ -98,7 +98,7 @@ const LocationList = () => {
   const deleteLocation = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
-    await axios.delete(`http://localhost:5000/api/location/${code}`);
+    await axios.delete(contextType.dbUrl +`location/${code}`);
     loadLocations();
   };
 

@@ -71,7 +71,7 @@ const GroupList = () => {
   const deleteGroup = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
-    await axios.delete(`http://localhost:5000/api/groups/${code}`);
+    await axios.delete(contextType.dbUrl +`groups/${code}`);
     loadGroups();
   };
 
