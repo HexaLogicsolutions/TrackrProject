@@ -351,6 +351,9 @@ margin-left: 5px;
   .textsmall {
     margin-right: 200px;
   }
+  .textsmall1 {
+    margin-right: 200px;
+  }
 
 
   .custcode {
@@ -830,6 +833,9 @@ label {
 }
 .textsmall {
   width: 80px;
+}
+.text150 {
+  width: 150px;
 }
 /* .textstd
   {

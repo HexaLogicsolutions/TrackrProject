@@ -25,6 +25,7 @@ class Entity extends Component {
       buttonText: "",
       desc: "",
       serial: "",
+      price: "",
       material: "",
       code: "",
       color: "",
@@ -87,6 +88,7 @@ class Entity extends Component {
     this.setState({
       desc: "",
       serial: "",
+      price: "",
       code: "",
       extcode: "",
       epc: "",
@@ -282,6 +284,7 @@ class Entity extends Component {
               epc: data.ent_epc,
               desc: data.ent_desc,
               serial: data.ent_serial,
+              price: data.ent_price,
               type: data.ent_type,
               subtype: data.ent_subtype,
               brand: data.ent_brand,
@@ -337,6 +340,7 @@ class Entity extends Component {
       epc,
       desc,
       serial,
+      price,
       material,
       type,
       subtype,
@@ -368,6 +372,7 @@ class Entity extends Component {
         epc: epc,
         desc: desc,
         serial: serial,
+        price: price,
         type: type,
         subtype: subtype,
         brand: brand,
@@ -418,6 +423,7 @@ class Entity extends Component {
         epc: epc,
         desc: desc,
         serial: serial,
+        price: price,
         material: material,
         type: type,
         subtype: subtype,
@@ -745,6 +751,7 @@ class Entity extends Component {
                       </div>
                     </span>
                   </div>
+                  
                   <div className="form-group">
                     <label className="labelstd">Location:</label>
                     <span className="myspan">
@@ -805,7 +812,23 @@ class Entity extends Component {
                       </div>
                     </span>
                   </div>
-
+                  <div className="form-group">
+                    <label className="labelstd">Price:</label>
+                    <span className="myspan">
+                      <div className="form__div">
+                        <input
+                          className="detail__input text150"
+                          type="text"
+                          name="price"
+                          // type={this.state.editUser ? 'hidden': 'text'}
+                          value={this.state.price}
+                          onChange={(event) => {
+                            this.setState({ price: event.target.value });
+                          }}
+                        />
+                      </div>
+                    </span>
+                  </div>
                   <div className="form-group">
                     <label
                       className={!this.state.editEntity ? "hidden" : "labelstd"}

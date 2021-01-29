@@ -228,6 +228,9 @@ const EntityList = () => {
                 <th scope="col" style={{ width: "150px" }}>
                   Serial
                 </th>
+                <th scope="col" style={{ width: "150px" }}>
+                 Price
+                </th>
                 <th scope="col" style={{ width: "400px" }}>
                   Name
                 </th>
@@ -260,6 +263,11 @@ const EntityList = () => {
                   <td style={{ verticalAlign: "middle" }}>
                     {" "}
                     {entity.ent_serial}
+                  </td>
+                  <td style={{ verticalAlign: "middle" }}>
+                  {"₹ "}
+                  {entity.ent_price.toLocaleString('en-IN')}
+                    
                   </td>
                   <td style={{ verticalAlign: "middle" }}>{entity.ent_desc}</td>
 

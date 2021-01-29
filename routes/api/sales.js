@@ -17,12 +17,20 @@ router.get("/", (req, res) => {
 });
 
 router.get("/sale-quantity-by-material", (req, res) => {
-  console.log("in sale-quantity-by-material()");
+  console.log("in sale-quantity-by-materialxxx()");
   const fromDt = req.query.fromDt;
   const toDt = req.query.toDt;
   // console.log("from:" + fromDt);
   // console.log("to:" + toDt);
   const mydata = Sale.aggregate([
+    {
+      $lookup: {
+        from: "material",
+        localField: "sal_material",
+        foreignField: "mat_code",
+        as: "mydata",
+      },
+    },
     {
       $match: {
         sal_date: {
@@ -32,7 +40,7 @@ router.get("/sale-quantity-by-material", (req, res) => {
       },
     },
     {
-      $group: { _id: "$sal_material", TotalMaterial: { $sum: 1 } },
+      $group: { _id: "$mydata.mat_name", TotalMaterial: { $sum: 1 } },
     },
   ])
     .then((sale) => {
@@ -88,6 +96,14 @@ router.get("/sale-amount-by-material", (req, res) => {
   const toDt = req.query.toDt;
   const mydata = Sale.aggregate([
     {
+    $lookup: {
+      from: "material",
+      localField: "sal_material",
+      foreignField: "mat_code",
+      as: "mydata",
+    },
+  },
+    {
       $match: {
         sal_date: {
           $gte: new Date(fromDt),
@@ -95,7 +111,7 @@ router.get("/sale-amount-by-material", (req, res) => {
         },
       },
     },
-    { $group: { _id: "$sal_material", TotalMaterial: { $sum: "$sal_price" } } },
+    { $group: { _id: "$mydata.mat_name", TotalMaterial: { $sum: "$sal_price" } } },
   ])
     .then((sale) => {
       if (sale.length == 0) res.send("");

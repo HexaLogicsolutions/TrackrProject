@@ -80,8 +80,17 @@ router.get("/", (req, res) => {
 router.get("/current-stock-by-material", (req, res) => {
   console.log("in current-stock-by-material()");
   const mydata = Entity.aggregate([
+    {
+      $lookup: {
+        from: "material",
+        localField: "ent_material",
+        foreignField: "mat_code",
+        as: "mydata",
+      },
+    },
+    
     { $match: { ent_status: "STK" } },
-    { $group: { _id: "$ent_material", TotalMaterial: { $sum: 1 } } },
+    { $group: { _id: "$mydata.mat_name", TotalMaterial: { $sum: 1 } } },
   ])
     .then((entity) => {
       if (entity.length == 0) res.send("No  found");

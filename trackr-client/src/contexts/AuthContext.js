@@ -7,6 +7,7 @@ class AuthContextProvider extends Component {
     isAuthenticated: false,
     currentUser: null,
     dbUrl: "https://my12app.herokuapp.com/api/",
+    // dbUrl: "http://localhost:5000/api/",
     // selectedUser: null,
     // selectedGroup:null,
     currentMsg: null,

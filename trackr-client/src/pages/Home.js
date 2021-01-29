@@ -104,7 +104,7 @@ class Home extends Component {
       this.state.fromDate +
       "&toDt=" +
       this.state.toDate;
-    // console.log("query:" + qs);
+    console.log("query:" + qs);
     axios
       .get(qs)
       .then((res) => {
