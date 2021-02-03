@@ -51,6 +51,30 @@ const BarHandheldScan = ({ labels, totalVals, missingVals, scannedVals }) => {
     legend: {
       display: true,
     },
+    tooltips: {
+      enabled: true
+  },
+  hover: {
+      animationDuration: 1
+  },
+  animation: {
+  duration: 1,
+  onComplete: function () {
+      var chartInstance = this.chart,
+          ctx = chartInstance.ctx;
+          ctx.textAlign = 'center';
+          ctx.fillStyle = "rgba(0, 0, 0, 1)";
+          ctx.textBaseline = 'bottom';
+          // Loop through each data in the datasets
+          this.data.datasets.forEach(function (dataset, i) {
+              var meta = chartInstance.controller.getDatasetMeta(i);
+              meta.data.forEach(function (bar, index) {
+                  var data = dataset.data[index];
+                  ctx.fillText(data, bar._model.x, bar._model.y - 5);
+              });
+          });
+      }
+  },
     // tooltips:false,
     // plugins: {
     //     datalabels: {
@@ -68,6 +92,7 @@ const BarHandheldScan = ({ labels, totalVals, missingVals, scannedVals }) => {
         {
           ticks: {
             min: 0,
+            
           },
           scaleLabel: {
             display: true,
@@ -78,7 +103,7 @@ const BarHandheldScan = ({ labels, totalVals, missingVals, scannedVals }) => {
       ],
       xAxes: [
         {
-          barPercentage: 0.8,
+          // barPercentage: 0.8,
           //   type: "time",
           //   time: {
           //     // unit: "minute",
@@ -87,6 +112,7 @@ const BarHandheldScan = ({ labels, totalVals, missingVals, scannedVals }) => {
           //       month: "HH:mm",
           //     },
           //   },
+          maxBarThickness: 75,
           scaleLabel: {
             display: true,
             labelString: "Date/Time",
@@ -98,7 +124,7 @@ const BarHandheldScan = ({ labels, totalVals, missingVals, scannedVals }) => {
   };
 
   return (
-    <div className="chartContainer Chart  ">
+    <div className="chartContainer Chart   ">
       <Bar data={chartData} height={240} options={options} />
     </div>
   );

@@ -113,6 +113,7 @@ function Linechart2() {
       ],
       xAxes: [
         {
+          maxBarThickness: 75,
           type: "time",
           time: {
             unit: "month",

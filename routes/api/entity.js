@@ -91,6 +91,7 @@ router.get("/current-stock-by-material", (req, res) => {
     
     { $match: { ent_status: "STK" } },
     { $group: { _id: "$mydata.mat_name", TotalMaterial: { $sum: 1 } } },
+    {$sort: {_id: 1}}
   ])
     .then((entity) => {
       if (entity.length == 0) res.send("No  found");

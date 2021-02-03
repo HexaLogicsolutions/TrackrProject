@@ -102,6 +102,30 @@ function BarHandheldScanOld() {
     legend: {
       display: true,
     },
+  //   tooltips: {
+  //     enabled: true
+  // },
+  // hover: {
+  //     animationDuration: 1
+  // },
+  // animation: {
+  // duration: 1,
+  // onComplete: function () {
+  //     var chartInstance = this.chart,
+  //         ctx = chartInstance.ctx;
+  //         ctx.textAlign = 'center';
+  //         ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  //         ctx.textBaseline = 'bottom';
+  //         // Loop through each data in the datasets
+  //         this.data.datasets.forEach(function (dataset, i) {
+  //             var meta = chartInstance.controller.getDatasetMeta(i);
+  //             meta.data.forEach(function (bar, index) {
+  //                 var data = dataset.data[index];
+  //                 ctx.fillText(data, bar._model.x, bar._model.y - 5);
+  //             });
+  //         });
+  //     }
+  // },
     // tooltips:false,
     // plugins: {
     //     datalabels: {
@@ -137,6 +161,7 @@ function BarHandheldScanOld() {
           //       month: "HH:mm",
           //     },
           //   },
+          maxBarThickness: 75,
           scaleLabel: {
             display: true,
             labelString: "Date/Time",

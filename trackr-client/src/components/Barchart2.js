@@ -127,6 +127,7 @@ function Barchart2() {
               month: "MMM",
             },
           },
+          maxBarThickness: 75,
           scaleLabel: {
             display: true,
             labelString: "Months",

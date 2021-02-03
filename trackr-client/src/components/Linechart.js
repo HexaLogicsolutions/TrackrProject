@@ -49,6 +49,7 @@ function Linechart() {
       ],
       xAxes: [
         {
+          maxBarThickness: 75,
           scaleLabel: {
             display: true,
             labelString: "Months",

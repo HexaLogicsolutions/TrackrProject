@@ -27,12 +27,26 @@ export default class menu extends Component {
   static contextType = AuthContext;
 
   componentDidMount() {
-    setTimeout(function () {
-      if (!localStorage["reloaded"]) {
-        localStorage["reloaded"] = true;
-        window.location.reload();
-      }
-    }, 100);
+    // setTimeout(function () {
+    //   if (!localStorage["reloaded"]) {
+    //     localStorage["reloaded"] = true;
+    //     window.location.reload();
+    //   }
+    // }, 100);
+    (function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }  
+    else 
+      localStorage.removeItem('firstLoad');
+  }
+})();
+
   }
 
   render() {

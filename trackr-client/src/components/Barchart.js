@@ -41,6 +41,7 @@ function Barchart() {
       display: true,
       text: "Bar Chart",
     },
+    
     scales: {
       yAxes: [
         {
@@ -59,6 +60,7 @@ function Barchart() {
       ],
       xAxes: [
         {
+          maxBarThickness: 75,
           scaleLabel: {
             display: true,
             labelString: "Months",
@@ -70,7 +72,7 @@ function Barchart() {
     },
   };
   return (
-    <div className="chartContainer  w900 Chart" style={{ height: "250px" }}>
+    <div className="chartContainer  w900 Chart Chartres" style={{ height: "250px" }}>
       <Bar data={data} options={options} />
     </div>
   );

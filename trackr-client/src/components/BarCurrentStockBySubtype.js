@@ -27,17 +27,58 @@ const BarCurrentStockBySubtype = ({ labels, data }) => {
       <Bar
         data={chartData}
         // height="140px"
-
+        // height={"180%"}
         options={{
+        //   layout: {
+        //     padding: {
+        //         left: 0,
+        //         right: 0,
+        //         top: 0,
+        //         bottom: 0
+        //     }
+        // },
           responsive: true,
           legend: {
             display: false,
           },
+          tooltips: {
+            enabled: true
+        },
+        hover: {
+            animationDuration: 1
+        },
+        animation: {
+        duration: 1,
+        onComplete: function () {
+            var chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+                ctx.textAlign = 'center';
+                ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                ctx.textBaseline = 'bottom';
+                // Loop through each data in the datasets
+                this.data.datasets.forEach(function (dataset, i) {
+                    var meta = chartInstance.controller.getDatasetMeta(i);
+                    meta.data.forEach(function (bar, index) {
+                        var data = dataset.data[index];
+                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                    });
+                });
+            }
+        },
 
-          title: { text: "Current Stock by Subtype", display: true },
+          title: { text: "Current Stock by Subtype", display: true},
           scales: {
             xAxes: [
               {
+                ticks: {
+                  min: 0,
+                  max: 20,
+                  
+    
+                },
+                
+                maxBarThickness: 75,
+                // maxBarLength: 10 ,
                 scaleLabel: {
                   display: true,
                   labelString: "Subtypes",
@@ -54,6 +95,8 @@ const BarCurrentStockBySubtype = ({ labels, data }) => {
                 ticks: {
                   min: 0,
                   // max: 20,
+                  beginAtZero: true,
+      padding: 25,
                 },
 
                 scaleLabel: {

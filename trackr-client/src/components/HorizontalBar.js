@@ -54,6 +54,7 @@ function Horizontalbar() {
     scales: {
       xAxes: [
         {
+          maxBarThickness: 75,
           ticks: {
             min: 0,
             max: 6,

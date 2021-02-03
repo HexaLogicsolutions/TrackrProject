@@ -440,6 +440,9 @@ margin-left: 5px;
 }
 
 @media (max-width: 414px) {
+  .Chartres{
+    height:165px;
+  }
 .mlabel
 {
   margin-left: 15px;

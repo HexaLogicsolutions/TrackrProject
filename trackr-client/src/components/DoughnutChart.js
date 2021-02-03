@@ -32,6 +32,7 @@ const BarSaleQuantityByMaterial = ({ labels, data }) => {
           legend: {
             display: false,
           },
+          
           responsive: true,
           title: { text: "Sale Quantity by Material", display: true },
           scales: {
