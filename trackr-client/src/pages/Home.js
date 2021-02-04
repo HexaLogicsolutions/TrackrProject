@@ -271,10 +271,11 @@ class Home extends Component {
     axios
       .get(this.context.dbUrl + "entity/current-stock-by-material")
       .then((res) => {
-        // console.log(res);
+        console.log("current-stock-by-material====");
         for (const dataObj of res.data) {
           labels.push(dataObj._id);
           data.push(dataObj.TotalMaterial);
+          console.log("material:"+dataObj._id);
         }
         if (labels.length == 0) {
           labels.push("No Data Found!");
@@ -346,8 +347,16 @@ class Home extends Component {
             scannedVals.push(0);
             break;
           }
+          // future date/time
           var dt = new Date(dataObj._id);
+
+          // covert to UTC/GMT
+          // var isoDateString = dt1.toISOString();
+          // console.log("UTC:"+isoDateString);
+          // var dt = new Date(isoDateString);
+
           var hh = dt.getHours();
+          console.log("hh:"+hh);
           if (hh < 10) hh = "0" + hh;
           var mm = dt.getMinutes();
           if (mm < 10) mm = "0" + mm;

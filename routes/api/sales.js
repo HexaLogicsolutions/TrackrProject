@@ -41,7 +41,9 @@ router.get("/sale-quantity-by-material", (req, res) => {
     },
     {
       $group: { _id: "$mydata.mat_name", TotalMaterial: { $sum: 1 } },
+      
     },
+    { $sort: {_id: 1}}
   ])
     .then((sale) => {
       if (sale.length == 0) res.send("");
@@ -79,6 +81,7 @@ router.get("/sale-quantity-by-subtype", (req, res) => {
     {
       $group: { _id: "$mydata.est_name", TotalSubtype: { $sum: 1 } },
     },
+    { $sort: {_id: 1}}
   ])
     .then((sale) => {
       if (sale.length == 0) res.send("");
@@ -112,6 +115,7 @@ router.get("/sale-amount-by-material", (req, res) => {
       },
     },
     { $group: { _id: "$mydata.mat_name", TotalMaterial: { $sum: "$sal_price" } } },
+    { $sort: {_id: 1}}
   ])
     .then((sale) => {
       if (sale.length == 0) res.send("");
@@ -153,6 +157,7 @@ router.get("/sale-amount-by-subtype", (req, res) => {
     {
       $group: { _id: "$mydata.est_name", TotalSubtype: { $sum: "$sal_price" } },
     },
+    { $sort: {_id: 1}}
   ])
     .then((entity) => {
       if (entity.length == 0) res.send("");

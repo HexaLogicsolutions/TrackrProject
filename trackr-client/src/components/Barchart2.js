@@ -139,7 +139,7 @@ function Barchart2() {
   };
 
   return (
-    <div className=" chartContainer w900 Chart" style={{ height: "250px" }}>
+    <div className=" chartContainer w900 Chart Chartres " >
       <Bar data={Data} options={options} />
     </div>
   );

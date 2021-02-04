@@ -265,6 +265,7 @@ router.get("/handheld-scan", (req, res) => {
         },
       },
     },
+    { $sort: {_id: 1}}
     // { $group: { _id: "$ent_material", TotalMaterial: { $sum: 1 } } },
   ])
     .then((entity) => {
@@ -307,6 +308,7 @@ router.get("/handheld-scan", (req, res) => {
           },
         },
       },
+      { $sort: {_id: 1}}
       // { $group: { _id: "$ent_material", TotalMaterial: { $sum: 1 } } },
     ])
       .then((entity) => {

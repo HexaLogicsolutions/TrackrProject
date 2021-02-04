@@ -23,7 +23,7 @@ const BarCurrentStockBySubtype = ({ labels, data }) => {
     chart();
   }, [labels, data, contextType]);
   return (
-    <div className="chartContainer Chart ">
+    <div className="chartContainer Chart Chartres  ">
       <Bar
         data={chartData}
         // height="140px"
@@ -37,35 +37,37 @@ const BarCurrentStockBySubtype = ({ labels, data }) => {
         //         bottom: 0
         //     }
         // },
+         
           responsive: true,
+          maintainAspectRatio: false,
           legend: {
             display: false,
           },
-          tooltips: {
-            enabled: true
-        },
-        hover: {
-            animationDuration: 1
-        },
-        animation: {
-        duration: 1,
-        onComplete: function () {
-            var chartInstance = this.chart,
-                ctx = chartInstance.ctx;
-                ctx.textAlign = 'center';
-                ctx.fillStyle = "rgba(0, 0, 0, 1)";
-                ctx.textBaseline = 'bottom';
-                // Loop through each data in the datasets
-                this.data.datasets.forEach(function (dataset, i) {
-                    var meta = chartInstance.controller.getDatasetMeta(i);
-                    meta.data.forEach(function (bar, index) {
-                        var data = dataset.data[index];
-                        ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                    });
-                });
-            }
-        },
-
+        //   tooltips: {
+        //     enabled: true
+        // },
+        // hover: {
+        //     animationDuration: 1
+        // },
+        // animation: {
+        // duration: 1,
+        // onComplete: function () {
+        //     var chartInstance = this.chart,
+        //         ctx = chartInstance.ctx;
+        //         ctx.textAlign = 'center';
+        //         ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        //         ctx.textBaseline = 'bottom';
+        //         // Loop through each data in the datasets
+        //         this.data.datasets.forEach(function (dataset, i) {
+        //             var meta = chartInstance.controller.getDatasetMeta(i);
+        //             meta.data.forEach(function (bar, index) {
+        //                 var data = dataset.data[index];
+        //                 ctx.fillText(data, bar._model.x, bar._model.y - 5);
+        //             });
+        //         });
+        //     }
+        // },
+        responsive: true,
           title: { text: "Current Stock by Subtype", display: true},
           scales: {
             xAxes: [
@@ -96,7 +98,7 @@ const BarCurrentStockBySubtype = ({ labels, data }) => {
                   min: 0,
                   // max: 20,
                   beginAtZero: true,
-      padding: 25,
+    
                 },
 
                 scaleLabel: {

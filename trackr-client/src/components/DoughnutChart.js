@@ -24,7 +24,7 @@ const BarSaleQuantityByMaterial = ({ labels, data }) => {
   }, [labels, data, contextType]);
 
   return (
-    <div className="chartContainer Chart  ">
+    <div className="chartContainer Chart  Chartres  ">
       <Bar
         data={chartData}
         height="140px"

@@ -62,7 +62,7 @@ function Linechart() {
   };
 
   return (
-    <div className=" chartContainer w900 Chart" style={{ height: "250px" }}>
+    <div className=" chartContainer w900 Chart Chartres ">
       <Line data={data} options={options} />
     </div>
   );

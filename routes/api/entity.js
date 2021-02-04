@@ -69,6 +69,7 @@ router.post("/", (req, res) => {
 
 router.get("/", (req, res) => {
   Entity.find()
+  
     .then((entity) => {
       res.send(entity);
     })
@@ -78,7 +79,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/current-stock-by-material", (req, res) => {
-  console.log("in current-stock-by-material()");
+  console.log("in current-stock-by-material()xxx");
   const mydata = Entity.aggregate([
     {
       $lookup: {
@@ -94,9 +95,15 @@ router.get("/current-stock-by-material", (req, res) => {
     {$sort: {_id: 1}}
   ])
     .then((entity) => {
-      if (entity.length == 0) res.send("No  found");
-      else res.send(entity);
-      console.log("Totolmaterial:" + mydata);
+      if (entity.length == 0) 
+        res.send("Not found");
+      else {
+        // for (i = 0; i < entity.length; i++) {
+        //   const entityx = entity[i];
+        //   console.log("ent:" + entityx._id);
+        // }
+        res.send(entity);
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -117,11 +124,12 @@ router.get("/current-stock-by-status", (req, res) => {
       },
     },
     { $group: { _id: "$mydata.sta_desc", TotalMaterial: { $sum: 1 } } },
+    { $sort: {_id: 1}}
   ])
     .then((status) => {
-      if (status.length == 0) res.send("No  found");
+      if (status.length == 0) res.send("Not found");
       else res.send(status);
-      console.log("Totolmaterial:" + mydata);
+      // console.log("Totolmaterial:" + mydata);
     })
     .catch((err) => {
       console.log(err);
@@ -141,12 +149,19 @@ router.get("/current-stock-by-subtype", (req, res) => {
     },
 
     { $group: { _id: "$mydata.est_name", TotalMaterial: { $sum: 1 } } },
+    { $sort: {_id: 1}}
+   
+  
   ])
     .then((entity) => {
       if (entity.length == 0) res.send("Not found");
       else {
-        // console.log("Total:" + entity);
+        // console.log("current-stock-by-subtype:" + entity);
 
+        for (i = 0; i < entity.length; i++) {
+          const entityx = entity[i];
+          console.log("entsub:" + entityx._id);
+        }
         res.send(entity);
       }
     })
