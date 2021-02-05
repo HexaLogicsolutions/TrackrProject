@@ -518,8 +518,8 @@ class Home extends Component {
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <div className="chart-500" style={{ display: "inline-block" }}>
+            
+              <div className="chart-500 marginleft " style={{ display: "inline-block" }}>
                 <div className="info-box">
                   <BarCurrentStockBySubtype
                     labels={this.state.BarCurrentStockBySubtypeLabels}
@@ -544,8 +544,8 @@ class Home extends Component {
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <div className="chart-500" style={{ display: "inline-block" }}>
+              
+              <div className="chart-500 marginleft" style={{ display: "inline-block" }}>
                 <div className="info-box">
                   <BarSaleQuantityBySubtype
                     labels={this.state.BarSaleQuantityBySubtypeLabels}
@@ -570,8 +570,8 @@ class Home extends Component {
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <div className="chart-500" style={{ display: "inline-block" }}>
+            
+              <div className="chart-500 marginleft" style={{ display: "inline-block" }}>
                 <div className="info-box">
                   {/* <BarSaleAmountBySubtype
                     labels={this.state.BarSaleAmountBySubtypeLabels}
@@ -604,8 +604,8 @@ class Home extends Component {
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <div className="chart-500" style={{ display: "inline-block" }}>
+          
+              <div className="chart-500  marginleft" style={{ display: "inline-block" }}>
                 <div className="info-box">
                   <BarHandheldInduction
                     labels={this.state.BarHandheldInductionLabels}
@@ -627,8 +627,8 @@ class Home extends Component {
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <div className="chart-500" style={{ display: "inline-block" }}>
+            
+              <div className="chart-500  marginleft" style={{ display: "inline-block" }}>
                 <div className="info-box">
                   <Linechart />
                 </div>

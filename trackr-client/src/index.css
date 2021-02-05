@@ -108,6 +108,10 @@ tr:nth-child(even) {
   width: 100%;
 
 }
+.marginleft
+{
+  margin-left: 20px;
+}
 
 .two {
   display: block;
@@ -445,6 +449,12 @@ margin-left: 5px;
 }
 
 @media (max-width: 414px) {
+  .chart-500
+  {
+    width: 380px;
+    /* margin:10px */
+    margin-left: -6px;
+  }
   .Chartres 
   {
     height: 195px;
