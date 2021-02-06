@@ -6,9 +6,17 @@ import { AuthContext } from "../contexts/AuthContext";
 const BarCurrentStockBySubtype = ({ labels, data }) => {
   const contextType = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
+  const [total, setTotal] = useState(data);
 
   useEffect(() => {
     const chart = () => {
+      if(data){
+        var x=0;
+        for (const dataObj of data) {
+          x=x+dataObj;
+        }
+        setTotal(x);
+      }
       setChartData({
         labels: labels,
         datasets: [
@@ -68,7 +76,7 @@ const BarCurrentStockBySubtype = ({ labels, data }) => {
         //     }
         // },
         responsive: true,
-          title: { text: "Current Stock by Subtype", display: true},
+          title: {text: "Current Stock by Subtype (Total: "+total+")", display: true},
           scales: {
             xAxes: [
               {

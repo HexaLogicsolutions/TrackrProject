@@ -147,7 +147,7 @@ router.get("/current-stock-by-subtype", (req, res) => {
         as: "mydata",
       },
     },
-
+    { $match: { ent_status: "STK" } },
     { $group: { _id: "$mydata.est_name", TotalMaterial: { $sum: 1 } } },
     { $sort: {_id: 1}}
    

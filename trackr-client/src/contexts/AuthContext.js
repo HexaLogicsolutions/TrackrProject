@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 class AuthContextProvider extends Component {
   state = {
+    APP_VERSION:"0.02",
     isAuthenticated: false,
     currentUser: null,
     dbUrl: "https://my12app.herokuapp.com/api/",
@@ -32,6 +33,12 @@ class AuthContextProvider extends Component {
   setCurrentObject = (obj) => {
     this.setState({
       currentObject: obj,
+    });
+  };
+  
+  setCurrentVerion = (msg) => {
+    this.setState({
+      APP_VERSION: msg,
     });
   };
 
@@ -87,6 +94,7 @@ class AuthContextProvider extends Component {
           setCurrentMsg: this.setCurrentMsg,
           setCurrentVariant: this.setCurrentVariant,
           setCurrentColor: this.setCurrentColor,
+          setCurrentVerion: this.setCurrentVerion,
           setCurrentObject: this.setCurrentObject,
           setDateFrom: this.setDateFrom,
           setDateTo: this.setDateTo,

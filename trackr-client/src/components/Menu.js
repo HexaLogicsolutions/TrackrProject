@@ -15,6 +15,7 @@ import {
   BiArea,
   BiCurrentLocation,
   BiGroup,
+  BiMessageSquareAdd,
 } from "react-icons/bi";
 import { BsSubtract, BsSearch } from "react-icons/bs";
 import { TiExport } from "react-icons/ti";
@@ -22,7 +23,7 @@ import { GrStatusCriticalSmall } from "react-icons/gr";
 import { MdAssignmentReturn } from "react-icons/md";
 import { AiFillAppstore } from "react-icons/ai";
 import { CgShutterstock } from "react-icons/cg";
-
+import { IoAddCircleSharp } from "react-icons/io";
 export default class menu extends Component {
   static contextType = AuthContext;
 
@@ -74,8 +75,11 @@ export default class menu extends Component {
                 </p>
                 <a href="#">
                   <i className="fa fa-circle text-success" /> Online
+             {/* <b> (Ver:  {this.context. APP_VERSION})</b> */}
                 </a>
+                
               </div>
+              
             </div>
             {/* search form */}
             <form action="#" method="get" className="sidebar-form">
@@ -134,17 +138,17 @@ export default class menu extends Component {
                 <ul className="treeview-menu">
                   <li>
                     <Link to="/Userlist">
-                      <FaRegUser /> Users
+                      <FaRegUser /> &nbsp;Users
                     </Link>
                   </li>
                   <li>
                     <Link to="/Grouplist">
-                      <BiGroup /> Groups
+                      <BiGroup />&nbsp; Groups
                     </Link>
                   </li>
                   <li>
                     <a href="/Demo">
-                      <FaBuilding /> Company
+                      <FaBuilding />&nbsp; Company
                     </a>
                   </li>
                 </ul>
@@ -160,33 +164,33 @@ export default class menu extends Component {
                 <ul className="treeview-menu">
                   <li>
                     <Link to="/Entitytypelist">
-                      <BiAddToQueue />
+                      <BiAddToQueue />&nbsp;
                       Entity Type
                     </Link>
                   </li>
                   <li>
                     <Link to="/EntitySubTypeList">
-                      <BsSubtract /> Entity Subtype
+                      <BsSubtract /> &nbsp;Entity Subtype
                     </Link>
                   </li>
                   <li>
                     <Link to="/Warehouselist">
-                      <FaWarehouse /> Warehouse
+                      <FaWarehouse />&nbsp; Warehouse
                     </Link>
                   </li>
                   <li>
                     <Link to="/LocationArealist">
-                      <BiArea /> Location Area
+                      <BiArea /> &nbsp;Location Area
                     </Link>
                   </li>
                   <li>
                     <Link to="/Locationlist">
-                      <BiCurrentLocation /> Location
+                      <BiCurrentLocation />&nbsp; Location
                     </Link>
                   </li>
                   <li>
                     <Link to="/EntityStatus">
-                      <GrStatusCriticalSmall /> Entity Status
+                      <GrStatusCriticalSmall /> &nbsp;Entity Status
                     </Link>
                   </li>
                 </ul>
@@ -213,12 +217,12 @@ export default class menu extends Component {
                 <ul className="treeview-menu">
                   <li>
                     <Link to="/Search">
-                      <FaSearch /> Search
+                      <FaSearch />&nbsp; Search
                     </Link>
                   </li>
                   <li>
                     <Link to="/EntityList">
-                      <FaListAlt /> List
+                      <FaListAlt />&nbsp; List
                     </Link>
                   </li>
                 </ul>
@@ -233,12 +237,12 @@ export default class menu extends Component {
                 <ul className="treeview-menu">
                   <li>
                     <a href="pages/tables/simple.html">
-                      <TiExport /> Sale
+                      <TiExport />&nbsp; Sale
                     </a>
                   </li>
                   <li>
                     <a href="pages/tables/data.html">
-                      <MdAssignmentReturn /> Returns
+                      <MdAssignmentReturn />&nbsp; Returns
                     </a>
                   </li>
                 </ul>
@@ -246,7 +250,7 @@ export default class menu extends Component {
 
               <li className="treeview">
                 <a href="#">
-                  <CgShutterstock /> <span>Stock</span>
+                  <CgShutterstock /> &nbsp;<span>Stock</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
                   </span>
@@ -254,18 +258,18 @@ export default class menu extends Component {
                 <ul className="treeview-menu">
                   <li>
                     <a href="pages/tables/simple.html">
-                      <BsSearch /> Search
+                      <BsSearch />&nbsp; Search
                     </a>
                   </li>
                   <li>
-                    <a href="pages/tables/data.html">Add / Remove</a>
+                    <a href="pages/tables/data.html">< BiMessageSquareAdd />&nbsp;&nbsp;Add / Remove</a>
                   </li>
                 </ul>
               </li>
 
               <li className="treeview">
                 <a href="#">
-                  <FaFileArchive /> <span>Reports</span>
+                  <FaFileArchive /> &nbsp;<span>Reports</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
                   </span>
@@ -273,17 +277,17 @@ export default class menu extends Component {
                 <ul className="treeview-menu">
                   <li>
                     <a href="pages/tables/simple.html">
-                      <AiFillAppstore /> Current Stock
+                      <AiFillAppstore />&nbsp; Current Stock
                     </a>
                   </li>
                   <li>
                     <a href="/Sale">
-                      <TiExport /> Sales
+                      <TiExport />&nbsp; Sales
                     </a>
                   </li>
                   <li>
                     <a href="pages/tables/data.html">
-                      <FaMobileAlt /> HH Trasaction
+                      <FaMobileAlt />&nbsp; HH Trasaction
                     </a>
                   </li>
                 </ul>

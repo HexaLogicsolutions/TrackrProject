@@ -5,9 +5,16 @@ import { AuthContext } from "../contexts/AuthContext";
 const BarSaleQuantityByMaterial = ({ labels, data }) => {
   const contextType = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
-
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     const chart = () => {
+      if(data){
+        var x=0;
+        for (const dataObj of data) {
+          x=x+dataObj;
+        }
+        setTotal(x);
+      }
       setChartData({
         labels: labels,
         datasets: [
@@ -34,7 +41,7 @@ const BarSaleQuantityByMaterial = ({ labels, data }) => {
           },
           
           responsive: true,
-          title: { text: "Sale Quantity by Material", display: true },
+          title: { text: "Sale Quantity by Material (Total: "+total+")", display: true },
           scales: {
             xAxes: [
               {

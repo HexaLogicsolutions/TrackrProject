@@ -536,6 +536,7 @@ class Entity extends Component {
                             ref={(el) => (this.myRefs[0] = el)}
                             value={this.state.code}
                             onChange={this.onChange}
+                            required
                           />
                         </div>
                       </span>
@@ -554,7 +555,7 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ extcode: event.target.value });
                           }}
-                          required
+                          required 
                         />
                       </div>
                     </span>
@@ -574,7 +575,7 @@ class Entity extends Component {
                             onChange={(event) => {
                               this.setState({ epc: event.target.value });
                             }}
-                            required
+                            
                           />
                         </div>
                       </span>
@@ -647,7 +648,7 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ epc: event.target.value });
                           }}
-                          required
+                          
                         />
                       </div>
                     </span>
@@ -681,7 +682,7 @@ class Entity extends Component {
                           name="type"
                           value={this.state.type}
                           onChange={this.onTypeChange}
-                          required
+                          
                         >
                           {this.state.types.map((ett) => (
                             <option key={ett.id} value={ett.value}>
@@ -701,7 +702,7 @@ class Entity extends Component {
                           name="subtype"
                           value={this.state.subtype}
                           onChange={this.onChange}
-                          required
+                          
                         >
                           {this.state.selectedSubtypes.map((est) => (
                             <option key={est.id} value={est.value}>
@@ -786,7 +787,7 @@ class Entity extends Component {
                             onChange={(event) => {
                               this.setState({ weight: event.target.value });
                             }}
-                            required
+                            
                           />
                         </div>
                       </span>
@@ -807,7 +808,7 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ purity: event.target.value });
                           }}
-                          required
+                          
                         />
                       </div>
                     </span>
@@ -846,7 +847,7 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ lastseen: event.target.value });
                           }}
-                          required
+                          
                           readOnly
                         />
                       </div>
@@ -870,7 +871,7 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ duration: event.target.value });
                           }}
-                          required
+                          
                           readOnly
                         />
                       </div>

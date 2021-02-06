@@ -6,13 +6,20 @@ import BarCurrentStockBySubtype from "./BarCurrentStockBySubtype";
 const BarHandheldInduction = ({ labels, data }) => {
   const contextType = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
-
+  const [total, setTotal] = useState(0);
   const chart = () => {
     // console.log("inside BarHandheldScanNew");
     // console.log("Labels: "+labels);
     // console.log("totalVals:"+totalVals);
     // console.log("scannedVals:"+scannedVals);
     // console.log("missingVals:"+missingVals);
+    if(data){
+      var x=0;
+      for (const dataObj of data) {
+        x=x+dataObj;
+      }
+      setTotal(x);
+    }
 
     setChartData({
       labels: labels,
@@ -73,7 +80,7 @@ const BarHandheldInduction = ({ labels, data }) => {
 
     title: {
       display: true,
-      text: "Handheld Inventory Induction",
+      text: "Handheld Inventory Induction (Total: "+total+")",
     },
     scales: {
       yAxes: [

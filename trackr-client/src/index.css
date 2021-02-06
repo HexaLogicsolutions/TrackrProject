@@ -4,8 +4,12 @@
 body::-webkit-scrollbar {
   display: none;
 }
-  
+ 
+.ver{
+  text-align: right;
+}
 .fixed {
+
     position: fixed;
     top:0; left:0;
     width: 100%; }

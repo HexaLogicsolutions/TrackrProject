@@ -41,9 +41,13 @@ class AppNavbar extends Component {
               </span>
               {/* logo for regular state and mobile devices */}
               <span className="logo-lg">
-                <b>Hexa</b>Logic
+                <b>Hexa</b>Logic 
+          
               </span>
+              <b style={{alignContent:'right'}}>  Version: {this.context. APP_VERSION}</b>
+            
             </a>
+            
             {/* Header Navbar: style can be found in header.less */}
             <nav className="navbar navbar-static-top">
               {/* Sidebar toggle button*/}

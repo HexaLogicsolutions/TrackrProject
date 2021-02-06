@@ -7,7 +7,15 @@ import BarCurrentStockBySubtype from "./BarCurrentStockBySubtype";
 const BarSaleAmountBySubtype = ({ labels, data }) => {
   const contextType = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
+  const [total, setTotal] = useState(0);
   const chart = () => {
+    if(data){
+      var x=0;
+      for (const dataObj of data) {
+        x=x+dataObj;
+      }
+      setTotal(x);
+    }
     setChartData({
       labels: labels,
       datasets: [
@@ -67,7 +75,7 @@ const BarSaleAmountBySubtype = ({ labels, data }) => {
         //     }
         // },
           responsive: true,
-          title: { text: "Sale Amount by Subtype", display: true },
+          title: { text: "Sale Amount by Subtype (Total: "+total+")", display: true },
           scales: {
             yAxes: [
               {

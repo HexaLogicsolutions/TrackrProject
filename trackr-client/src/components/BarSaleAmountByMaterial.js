@@ -6,9 +6,17 @@ const BarSaleAmountByMaterial = ({ labels, data }) => {
   const [chartData, setChartData] = useState({});
 
   const contextType = useContext(AuthContext);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const chart = () => {
+      if(data){
+        var x=0;
+        for (const dataObj of data) {
+          x=x+dataObj;
+        }
+        setTotal(x);
+      }
       setChartData({
         labels: labels,
         datasets: [
@@ -59,7 +67,7 @@ const BarSaleAmountByMaterial = ({ labels, data }) => {
         //     }
         // },
           responsive: true,
-          title: { text: "Sale Amount by Material", display: true },
+          title: { text: "Sale Amount by Material  (Total: " +"₹ "+total.toLocaleString('en-IN')+")", display: true },
           scales: {
             yAxes: [
               {

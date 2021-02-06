@@ -457,9 +457,11 @@ class Home extends Component {
             <h1>
               Hexa
               <small>Logic</small>
+             
             </h1>
-            <br></br>
+           <p className="ver">  Ver: {this.context. APP_VERSION}</p>
 
+            <br></br>
             <div className="your-class">
               <label htmlFor="From" style={{ marginTop: "-5px" }}>
                 From:
@@ -634,7 +636,9 @@ class Home extends Component {
                 </div>
               </div>
             </div>
+      
           </section>
+         
         </div>
       </Fragment>
     );

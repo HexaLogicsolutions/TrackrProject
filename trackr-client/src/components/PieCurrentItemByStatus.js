@@ -5,9 +5,17 @@ import { AuthContext } from "../contexts/AuthContext";
 const PieCurrentItemByStatus = ({ labels, data }) => {
   const contextType = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const chart = () => {
+      if(data){
+        var x=0;
+        for (const dataObj of data) {
+          x=x+dataObj;
+        }
+        setTotal(x);
+      }
       // console.log("Labels: " + labels);
       // console.log("Data: " + data);
       setChartData({
@@ -41,7 +49,7 @@ const PieCurrentItemByStatus = ({ labels, data }) => {
           },
 
           responsive: true,
-          title: { text: "Item Quantity by Status", display: true },
+          title: { text: "Item Quantity by Status (Total: "+total+")", display: true },
 
           scales: {},
           hover: {

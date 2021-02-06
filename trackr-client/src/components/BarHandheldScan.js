@@ -6,13 +6,36 @@ import BarCurrentStockBySubtype from "./BarCurrentStockBySubtype";
 const BarHandheldScan = ({ labels, totalVals, missingVals, scannedVals }) => {
   const contextType = useContext(AuthContext);
   const [chartData, setChartData] = useState({});
-
+  const [total, setTotal] = useState(0);
+  const [missing, setMissing] = useState(0);
+  const [scanned, setScanned] = useState(0);
   const chart = () => {
     // console.log("inside BarHandheldScanNew");
     // console.log("Labels: "+labels);
     // console.log("totalVals:"+totalVals);
     // console.log("scannedVals:"+scannedVals);
     // console.log("missingVals:"+missingVals);
+    if(totalVals){
+      var x=0;
+      for (const dataObj of totalVals) {
+        x=x+dataObj;
+      }
+      setTotal(x);
+    }
+    if(missingVals){
+      var y=0;
+      for (const dataObj of missingVals) {
+        y=y+dataObj;
+      }
+      setMissing(y);
+    }
+    if(scannedVals){
+      var z=0;
+      for (const dataObj of scannedVals) {
+        z=z+dataObj;
+      }
+      setScanned(z);
+    }
 
     setChartData({
       labels: labels,
@@ -85,7 +108,7 @@ const BarHandheldScan = ({ labels, totalVals, missingVals, scannedVals }) => {
     responsive: true,
     title: {
       display: true,
-      text: "Handheld Inventory Scan",
+      text: "Handheld Inventory Scan (Tot: "+total+", Scn: "+scanned+", Msg: "+missing+")",
     },
     scales: {
       yAxes: [
