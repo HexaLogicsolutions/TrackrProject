@@ -6,7 +6,7 @@ body::-webkit-scrollbar {
 }
  
 .ver{
-  text-align: right;
+  float: right;
 }
 .fixed {
 

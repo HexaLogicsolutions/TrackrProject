@@ -457,9 +457,10 @@ class Home extends Component {
             <h1>
               Hexa
               <small>Logic</small>
-             
+         <small className="ver">     Ver: {this.context. APP_VERSION}</small>
             </h1>
-           <p className="ver">  Ver: {this.context. APP_VERSION}</p>
+
+  
 
             <br></br>
             <div className="your-class">
