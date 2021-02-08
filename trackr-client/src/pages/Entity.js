@@ -319,7 +319,7 @@ class Entity extends Component {
       });
       return false;
     }
-
+   
     if (isNaN(this.state.purity)) {
       this.setState({
         msg: "Purity should always be a number",
@@ -814,15 +814,17 @@ class Entity extends Component {
                     </span>
                   </div>
                   <div className="form-group">
-                    <label className="labelstd">Price:</label>
+                    <label className="labelstd">Price(₹):</label>
                     <span className="myspan">
                       <div className="form__div">
+
                         <input
                           className="detail__input text150"
                           type="text"
                           name="price"
                           // type={this.state.editUser ? 'hidden': 'text'}
-                          value={this.state.price}
+                       
+                          value={this.state.price.toLocaleString('en-IN')}
                           onChange={(event) => {
                             this.setState({ price: event.target.value });
                           }}

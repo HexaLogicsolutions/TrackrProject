@@ -76,8 +76,8 @@ const GroupList = () => {
   };
 
   return (
-    <React.Fragment>
-      <div style={{ overflowX: "auto" }}>
+    
+      <div style={{ overflowX: "auto"  }}>
         {msg ? (
           // <Alert variant={variant}>{msg}</Alert>
           <div class={color}>
@@ -228,7 +228,7 @@ const GroupList = () => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+   
   );
 };
 export default GroupList;

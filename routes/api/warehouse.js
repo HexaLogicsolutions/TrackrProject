@@ -41,13 +41,13 @@ Warehouse.find({})
           .save()
           .then((data) => {
             console.log(data);
-            return res.json({ success: true, msg: " location type added" });
+            return res.json({ success: true, msg: " Warehouse added" });
           })
           .catch((err) => {
             console.log(err);
             return res.json({
               success: false,
-              msg: "Location type name could not be saved",
+              msg: "Warehouse name could not be saved",
             });
           });
       });
@@ -81,16 +81,15 @@ Warehouse.find({ whs_code: req.params.code })
 
 router.delete("/:code", (req, res) => {
   Warehouse.find({ whs_code: req.params.code })
-    .then((warehouse) => {
-      if (warehouse.length == 0) res.send("entity type not  found");
+    .then(( Warehouse) => {
+      if ( Warehouse.length == 0) res.send("warehouse not found");
       else {
-        const warehouse = warehouse[0];
-        warehouse
-          .delete()
+        const warehouse = Warehouse[0];
+        warehouse.delete()
           .then((ett) => {
-            console.log("location not found");
+            console.log("warehouse not found");
             res.send(
-              `Location type code ${req.params.code} deleted successfully.`
+              `Warehouse code ${req.params.code} deleted successfully.`
             );
           })
           .catch((e) => {

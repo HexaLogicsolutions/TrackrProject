@@ -5,6 +5,7 @@ import { login } from "../actions/auth";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import About from "../pages/About";
+import {Helmet} from "react-helmet";
 
 import UserList from "../pages/UserList";
 import User from "../pages/User";
@@ -59,6 +60,10 @@ class Routes extends Component {
       <Router>
         <AppNavbar />
         <div>
+        <Helmet>
+            <title>TrackR (Ver:{this.context. APP_VERSION})</title>
+            <meta name="description" content="Nested component" />
+        </Helmet>
           <Switch>
             <Route exact path="/" component={Login} />
             <Menu />

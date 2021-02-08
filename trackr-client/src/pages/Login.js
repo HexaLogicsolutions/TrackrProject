@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import {Helmet} from "react-helmet";
 import { login } from "../actions/auth";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -18,9 +18,19 @@ class Login extends Component {
       token: localStorage.getItem("token"),
     };
   }
+   disableScrolling(){
+    var x=window.scrollX;
+    var y=window.scrollY;
+    window.onscroll=function(){window.scrollTo(x, y);};
+}
+
+ enableScrolling(){
+    window.onscroll=function(){};
+}
   componentDidMount() {
     // this.inputRef.current.focus()
     console.log(this.inputRef);
+    this.disableScrolling();
   }
   onChange = (e) => {
     if (e.target.name === "code") {
@@ -107,6 +117,7 @@ class Login extends Component {
 
   render() {
     return (
+      
       // <div>
       // <nav className="navbar navbar-light bg-light ">
       //   <a className="navbar-brand" href="/">
@@ -412,6 +423,10 @@ class Login extends Component {
       //   </div>
       // </div>
       <div>
+        <Helmet>
+            <title>TrackR (Ver:{this.context. APP_VERSION})</title>
+            <meta name="description" content="Nested component" />
+        </Helmet>
         <nav
           className="navbar navbar-light bg-light "
           style={{ paddingBottom: "10px" }}
