@@ -347,21 +347,35 @@ class Home extends Component {
             scannedVals.push(0);
             break;
           }
-          // future date/time
-          var dt = new Date(dataObj._id);
+          // future date/
+          
 
+
+          var dt1 = new Date(dataObj._id);
+          var dt = new Date(dt1.getTime() - 330*60000);
           // covert to UTC/GMT
           // var isoDateString = dt1.toISOString();
           // console.log("UTC:"+isoDateString);
           // var dt = new Date(isoDateString);
 
+          // console.log("Old - "+dt.getHours()+":"+dt.getMinutes());
+          // console.log("New - "+dt1.getHours()+":"+dt1.getMinutes());
+//           var format = new SimpleDateFormat("dd MMM hh:mm");
+//           var dateStr = format.format(dt);
+//           console.log("DT: "+dateStr);
+
+//           var date_format_str = d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00";
+// console.log(date_format_str);
+  var dt3 =  new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,}).format(dt);
+// const today = Date.now();
+console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,}).format(dt));
           var hh = dt.getHours();
           console.log("hh:"+hh);
           if (hh < 10) hh = "0" + hh;
           var mm = dt.getMinutes();
           if (mm < 10) mm = "0" + mm;
 
-          labels.push(hh + ":" + mm);
+          labels.push(dt3);
           totalVals.push(dataObj.total);
           missingVals.push(dataObj.missing);
           scannedVals.push(dataObj.scanned);
@@ -411,13 +425,15 @@ class Home extends Component {
 
             break;
           }
-          var dt = new Date(dataObj._id);
+          var dt1 = new Date(dataObj._id);
+          var dt = new Date(dt1.getTime() - 330*60000);
+          var dt3 =  new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,}).format(dt);
           var hh = dt.getHours();
           if (hh < 10) hh = "0" + hh;
           var mm = dt.getMinutes();
           if (mm < 10) mm = "0" + mm;
 
-          labels.push(hh + ":" + mm);
+          labels.push(dt3);
           data.push(dataObj.inducted);
 
           x = x + 1;

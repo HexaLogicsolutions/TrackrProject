@@ -316,6 +316,7 @@ class Entity extends Component {
       this.setState({
         msg: "Weight should always be a number",
         variant: "danger",
+        color: "alert alert-warning",
       });
       return false;
     }
@@ -324,6 +325,7 @@ class Entity extends Component {
       this.setState({
         msg: "Purity should always be a number",
         variant: "danger",
+        color: "alert alert-warning",
       });
       return false;
     }
