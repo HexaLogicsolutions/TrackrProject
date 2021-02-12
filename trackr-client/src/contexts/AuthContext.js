@@ -7,7 +7,7 @@ class AuthContextProvider extends Component {
     APP_VERSION:"0.02",
     isAuthenticated: false,
     currentUser: null,
-    dbUrl: "https://my12app.herokuapp.com/api/",
+    dbUrl: "https://hls-trackr1.herokuapp.com/api/",
     // dbUrl: "http://localhost:5000/api/",
     // selectedUser: null,
     // selectedGroup:null,
