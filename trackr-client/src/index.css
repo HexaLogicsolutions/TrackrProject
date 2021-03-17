@@ -104,7 +104,23 @@ tr:nth-child(even) {
   /* .loglabel{
   width: 585px;
 } */
+.report-label
+{
+  width: 120px;
+  margin-left: 50px;
+ 
+    color: #222d32;
+    /* font-size: 15px; */
+    font-weight: normal;
 
+  
+ 
+}
+.print{
+  margin-top: 23px;
+  margin-left: 800px;
+  color: green;
+}
 .Chartres 
 {
   height: 260px;
@@ -293,6 +309,11 @@ margin-left: 5px;
 
 @media (max-width: 500px) {
 
+  .print{
+    margin-top: 23px;
+    margin-left: 10px;
+    color: green;
+  }
   .chart-500
   {
     width:'100%';
@@ -455,6 +476,20 @@ margin-left: 5px;
 }
 
 @media (max-width: 414px) {
+ 
+  /* .select{
+   
+    margin-left: -50px;
+  } */
+  .report-label{
+    width: 100px;
+  margin-left: 5px;
+  }
+  .print{
+    margin-top: 23px;
+    margin-left: 0px;
+    color: green;
+  }
   .chart-500
   {
     width: 380px;

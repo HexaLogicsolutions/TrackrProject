@@ -28,7 +28,7 @@ export const ReportViewer = () => {
     
     <div>
       <center>
-        <button onClick={handlePrint} style={{marginTop:'23px',marginLeft:'800px',color:'green'.length}}><FaPrint /></button>
+        <button onClick={handlePrint} className="print"><FaPrint /></button>
         &nbsp;    &nbsp;    &nbsp;
         <button onClick={back} style={{marginTop:'23px',color:'red'}}>Back</button>
       </center>

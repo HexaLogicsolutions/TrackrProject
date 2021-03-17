@@ -352,7 +352,7 @@ const ReportFilter = () => {
             <div>
               <div>
                 <div style={{ display: "flex", marginBottom: "10px" }}>
-                  <label className="label100 mlabel">Warehouse:</label>
+                  <label className="label100 report-label">Warehouse:</label>
                   <Select
                     className="width300"
                     value={selectedWarehouseOptions}
@@ -388,13 +388,13 @@ const ReportFilter = () => {
             </div>
             <div style={{ display: "flex", marginBottom: "10px" }}>
               <label
-                className="label100 mlabel"
-                style={{ width: "120px", marginLeft: "50px" }}
+                className=" report-label"
+                // style={{ width: "120px", marginLeft: "50px" }}
               >
-                Ent Subtype:
+                Subtype:
               </label>
               <Select
-                className="width300"
+                className="width300  "
                 value={selectedSubTypeOptions}
                 onChange={handleSubTypeChange}
                 options={subtypeOptions}
@@ -426,10 +426,10 @@ const ReportFilter = () => {
             <div className="rows">
               <div style={{ display: "flex", marginBottom: "10px" }}>
                 <label
-                  className="label100 mlabel"
-                  style={{ width: "120px", marginLeft: "50px" }}
+                  className="report-label"
+                  // style={{ width: "120px", marginLeft: "50px" }}
                 >
-                  Last seen To:
+                   To:
                 </label>
                 <input
                   type="date"
