@@ -241,6 +241,7 @@ height:auto;
 
     margin-left: 10px;
   }
+  
   .header {
     margin-left: 250px;
   }
@@ -887,7 +888,12 @@ label {
 
 .selectnew{
   width: 250px;
+ 
   /* height: 20px; */
+}
+.width300
+{
+  width: 370px;
 }
 input.largerCheckbox { 
   width: 40px; 
@@ -926,3 +932,46 @@ input.largerCheckbox {
   display: inline-block;
 }
 }
+.pdf {
+  width: 612px;
+  height: 792px;
+  background-color: white;
+  margin: 0 auto;
+}
+/* 
+  .tablerow {
+    -webkit-print-color-adjust: exact;
+      color: red !important;
+  } */
+  /* @media print {
+    body {
+       -webkit-print-color-adjust: exact;
+    }
+ } */
+ /* @media print {
+  html, body {
+    height: initial !important;
+    overflow: initial !important;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@page {
+  size: auto;
+ 
+  margin: 20mm;
+ 
+} */
+@media print {
+  .printElement {
+  }
+}
+    /* .tablerow {
+       color: red;
+       background: none;
+    }
+    .myheading{
+      color:blue;
+    } */
+ 
+  @media print { html, body { height: initial !important; overflow: initial !important; }}

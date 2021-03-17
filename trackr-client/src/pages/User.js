@@ -323,7 +323,6 @@ class User extends Component {
                         />
                       </div>
                     </span>
-
                     {/*  */}
                   </div>
 

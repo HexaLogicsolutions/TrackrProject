@@ -4,21 +4,17 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faTrashAlt, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import { AddDepModal } from "../components/AddDepModal";
-
 const EntityTypeList = () => {
   let history = useHistory();
   const contextType = useContext(AuthContext);
-
   const [entitytype, setGroup] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [msg, setMsg] = useState("");
   const [color, setColor] = useState();
   const [variant, setVariant] = useState();
   const [currentGroup, setCurrentGroup] = useState("");
-
   let closeModal = () => {
     setShowModal(false);
   };
@@ -26,7 +22,6 @@ const EntityTypeList = () => {
     const result = await axios.get(contextType.dbUrl + "entitytype");
     setGroup(result.data);
   };
-
   useEffect(() => {
     if (contextType.currentMsg) {
       setMsg(contextType.currentMsg);
@@ -51,7 +46,6 @@ const EntityTypeList = () => {
     contextType.setCurrentObject(null);
     history.push("/EntityType");
   };
-
   const editentity = async (ett_code) => {
     console.log(`Edit ${ett_code}`);
     contextType.setCurrentObject(ett_code);
@@ -59,21 +53,18 @@ const EntityTypeList = () => {
 
     //this.props.history.push("/User");
   };
-
   const delett = async (ett_code) => {
     console.log(`Del ${ett_code}`);
     //contextType.setSelectedUser(usr_code);
     setCurrentGroup(ett_code);
     setShowModal(true);
   };
-
   const deleteentitytype = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
     await axios.delete(contextType.dbUrl +`entitytype/${code}`);
     loadGroups();
   };
-
   return (
     <React.Fragment>
       <div style={{ overflowX: "auto" }}>

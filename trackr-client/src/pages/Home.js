@@ -91,6 +91,8 @@ class Home extends Component {
     this.setState({ toDate: today + "T23:59:59.000Z" });
     this.setState({ myFromDate: today });
     this.setState({ myToDate: today }, () => this.refresh());
+
+    // setMyFromDate(today);
   };
 
   drawBarSaleQuantityByMaterial = () => {

@@ -47,9 +47,7 @@ export default class menu extends Component {
       localStorage.removeItem('firstLoad');
   }
 })();
-
   }
-
   render() {
     console.log(this.context.currentUser);
 
@@ -276,17 +274,17 @@ export default class menu extends Component {
                 </a>
                 <ul className="treeview-menu">
                   <li>
-                    <a href="pages/tables/simple.html">
+                    <a href="/Page2">
                       <AiFillAppstore />&nbsp; Current Stock
                     </a>
                   </li>
                   <li>
-                    <a href="/Sale">
+                    <a href="/SalesRepRedirect">
                       <TiExport />&nbsp; Sales
                     </a>
                   </li>
                   <li>
-                    <a href="pages/tables/data.html">
+                    <a href="/HandheldRepRedirect">
                       <FaMobileAlt />&nbsp; HH Trasaction
                     </a>
                   </li>

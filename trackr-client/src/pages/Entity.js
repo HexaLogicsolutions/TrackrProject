@@ -331,7 +331,6 @@ class Entity extends Component {
     }
     return true;
   };
-
   onSubmit = (e) => {
     console.log("submit");
     setTimeout(() => this.setState({ msg: "" }), 2000);

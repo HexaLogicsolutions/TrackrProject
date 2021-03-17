@@ -7,9 +7,8 @@ import HashMap from "hashmap";
 import { components } from "react-select";
 import ReactToExcel from "react-html-table-to-excel";
 import { addActionGroup, updateActionGroup } from "../actions/auth";
-
 import Select from "react-select";
-
+import jsPDF from "jspdf";
 require("es6-promise").polyfill();
 require("isomorphic-fetch");
 
@@ -49,11 +48,11 @@ const Search = () => {
     setQ(data);
   };
 
-  useEffect(() => {
-    fetch(contextType.dbUrl + "search")
-      .then((response) => response.json())
-      .then((json) => setData(json));
-  }, []);
+  // useEffect(() => {
+  //   fetch(contextType.dbUrl + "search")
+  //     .then((response) => response.json())
+  //     .then((json) => setData(json));
+  // }, []);
 
   useEffect(() => {
     console.log("ToDate:" + toDate);
@@ -94,6 +93,9 @@ const Search = () => {
     }
     if (selectedMaterials.length > 0) {
       qs = qs + "&material=" + selectedMaterials;
+    }
+    if (selectedWarehouses.length > 0) {
+      qs = qs + "&warehouse=" + selectedWarehouses;
     }
     if (selectedEntityTypes.length > 0) {
       qs = qs + "&entitytype=" + selectedEntityTypes;
@@ -223,6 +225,40 @@ const Search = () => {
     setSerial(e.target.value);
   }
 
+  function pdf() {
+//     console.log("hello pdf");
+//    var pdf = new jsPDF('l','pt','a3');
+//    pdf.html(document.getElementById('invoice'),{
+//     //  html2canvas:
+//     //     { scale: 0.6},
+       
+     
+// //      startY: 60,
+
+//      callback:function(){
+//        pdf.save('mydocument.pdf');
+//       window.open(pdf.output('bloburl'));     }
+//    })
+var pdfsize = 'a0';
+var pdf = new jsPDF('l', 'pt', pdfsize);
+
+pdf.autoTable({
+  html: 'table',
+  startY: 60,
+  styles: {
+    fontSize: 30,
+    cellWidth: 'wrap'
+  },
+  columnStyles: {
+    1: {columnWidth: 'auto'}
+  }
+});
+
+// pdf.save(pdfsize + ".pdf");
+window.open(pdf.output('bloburl')); 
+};
+  
+
   function updateToDate(e) {
     setToDate(e.target.value + "T23:59:59.000Z");
   }
@@ -302,7 +338,6 @@ const Search = () => {
       });
     }
   };
-
   //
   const ValueContainer = ({ children, getValue, ...props }) => {
     var values = getValue();
@@ -453,13 +488,13 @@ const Search = () => {
   // Warehouses
   const [warehouseOptions, setWarehouseOptions] = useState([]);
   const [selectedWarehouseOptions, setSelectedWarehouseOptions] = useState([]);
-  const [selectedWarehouses, setSelectedWarehouses] = useState("");
+  const [selectedWarehouses, setSelectedWarehouse] = useState("");
 
   const loadWarehouses = async () => {
     const result = await axios.get(contextType.dbUrl + "warehouse");
 
-    let warehousesFromAPI = result.data.map((lat) => {
-      return { value: lat.lat_code, label: lat.lat_name, id: lat._id };
+    let warehousesFromAPI = result.data.map((whs) => {
+      return { value: whs.whs_code, label: whs.whs_name, id: whs._id };
     });
     setWarehouseOptions(
       [{ id: "0", value: "", label: "" }].concat(warehousesFromAPI)
@@ -469,13 +504,13 @@ const Search = () => {
   useEffect(() => {
     let myCode = "";
     if (selectedWarehouseOptions != null) {
-      let codes = selectedWarehouseOptions.map((lat) => {
-        myCode = myCode + "|" + lat.value;
+      let codes = selectedWarehouseOptions.map((whs) => {
+        myCode = myCode + "|" + whs.value;
         //console.log(myCode);
       });
-      setSelectedWarehouses(myCode.substr(1));
+      setSelectedWarehouse(myCode.substr(1));
     } else {
-      setSelectedWarehouses("");
+      setSelectedWarehouse("");
     }
   }, [selectedWarehouseOptions]);
 
@@ -491,12 +526,12 @@ const Search = () => {
     let selectedValues = [];
     console.log("WarehouseOptions: " + warehouseOptions);
 
-    warehouseOptions.map((lct) => {
-      if (selArray.includes(lct.value + "")) {
+    warehouseOptions.map((whs) => {
+      if (selArray.includes(whs.value + "")) {
         selectedValues.push({
-          value: lct.value,
-          label: lct.label,
-          id: lct.id,
+          value: whs.value,
+          label: whs.label,
+          id: whs.id,
         });
       } else {
         // console.log(etsub.value + " Code not found !");
@@ -1052,23 +1087,22 @@ const Search = () => {
                 />
               </div>
             </div>
-            <div className="">
-              <label className="label100 mlabel" style={{ width: "86px" }}>
+            <div style={{ display: "flex", marginBottom: "10px" }}>
+              <label className="label100 mlabel" style={{ width: "80px" }}>
                 Warehouse:
               </label>
-              <span className="myspan ">
-                <div className="form__div ">
-                  <input
-                    type="text"
-                    name="extcode"
-                    value={custCode}
-                    className=" textsmallnew"
-                    onChange={onChange1}
-                    required
-                    placeholder="Cust Code"
-                  />
-                </div>
-              </span>
+              <Select
+                className="selectnew"
+                value={selectedWarehouseOptions}
+                onChange={handleWarehouseChange}
+                options={warehouseOptions}
+                placeholder="None Selected"
+                isMulti
+                components={{
+                  ValueContainer,
+                }}
+                hideSelectedOptions={false}
+              />
             </div>
 
             {/* <div className="form-group ">
@@ -1099,7 +1133,7 @@ const Search = () => {
             <hr></hr>
           </center> */}
           <center>
-            <div class="oneline">
+             <div class="oneline">
               <button
                 type="submit"
                 className="btn btn-primary"
@@ -1146,15 +1180,15 @@ const Search = () => {
                     </li>
 
                     <li>
-                      {" "}
                       <button
                         className="btn"
+                        onClick={pdf}
                         style={{
                           width: "150px",
                           height: "30px",
                           backgroundColor: "lightgreen",
                         }}
-                        id="pdf"
+                        // id="pdf"
                       >
                         PDF
                       </button>

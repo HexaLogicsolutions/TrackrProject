@@ -229,7 +229,7 @@ export const addEntityType = (entity, callback) => {
     const body = JSON.stringify({code, extcode,epc,name,type,subtype,brand,status,location,lastseen,duration})
 
     axios
-        .post('/api/entity', body, config)
+        .post('/api/entitytype', body, config)
         .then(res => {
             if(res.data.success){
                 localStorage.setItem('token', res.data.token)

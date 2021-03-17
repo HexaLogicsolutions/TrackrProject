@@ -12,6 +12,9 @@ class AuthContextProvider extends Component {
     // selectedUser: null,
     // selectedGroup:null,
     currentMsg: null,
+    rptHeading:null,
+    rptData:null,
+    RepType:null,
     currentVariant: null,
     currentColor: null,
     currentObject: null,
@@ -30,18 +33,34 @@ class AuthContextProvider extends Component {
     ],
   };
 
+  
   setCurrentObject = (obj) => {
     this.setState({
       currentObject: obj,
     });
   };
   
+  setCurrentRptHeading= (obj) => {
+    this.setState({
+      rptheading: obj,
+    });
+  };
+
+  setCurrentRptData= (obj) => {
+    this.setState({
+      rptdata: obj,
+    });
+  };
+  setCurrentRepType = (obj) => {
+    this.setState({
+      RepType: obj,
+    });
+  };
   setCurrentVerion = (msg) => {
     this.setState({
       APP_VERSION: msg,
     });
   };
-
   setCurrentMsg = (msg) => {
     this.setState({
       currentMsg: msg,
@@ -96,6 +115,9 @@ class AuthContextProvider extends Component {
           setCurrentColor: this.setCurrentColor,
           setCurrentVerion: this.setCurrentVerion,
           setCurrentObject: this.setCurrentObject,
+          setCurrentRepType: this.setCurrentRepType,
+          setCurrentRptData:this.setCurrentRptData,
+          setCurrentRptHeading:this.setCurrentRptHeading,
           setDateFrom: this.setDateFrom,
           setDateTo: this.setDateTo,
           login: this.login,

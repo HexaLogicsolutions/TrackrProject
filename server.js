@@ -53,6 +53,7 @@ app.use('/api/brand', require('./routes/api/brand'))
 app.use('/api/material', require('./routes/api/material'))
 app.use('/api/test', require('./routes/api/test'))
 app.use('/api/search', require('./routes/api/search'))
+app.use('/api/reports', require('./routes/api/Reports'))
 app.use(express.static("trackr-client/build"));
 // server static assests if in production
 if(process.env.NODE_ENV === 'production')

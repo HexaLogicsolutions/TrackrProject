@@ -30,10 +30,20 @@ import LocationArea from "../pages/LocationArea";
 import ActionGroup from "../pages/ActionGroup";
 import ActionGroupList from "../pages/ActionGroupList";
 import Entity from "../pages/Entity";
-import Reports from "../pages/Reports";
+// import Reports from "../pages/Reports";
 import Demo from "../pages/Demo";
+import pdfdemo from "../pages/pdfdemo";
+import ReportFilter from "../pages/ReportFilter";
+import SalesRepRedirect from "../redirects/SalesRepRedirect";
+import HandheldRepRedirect from "../redirects/HandheldRepRedirect";
+
+
 import Search from "../pages/Search";
 import Sale from "../components/Sale";
+import ActionDemo from "../pages/ActionDemo";
+import { ReportViewer } from "../pages/ReportViewer";
+
+// import TicketsComponent from "../pages/TicketComponent";
 
 const Route = require("react-router-dom").Route;
 
@@ -69,8 +79,16 @@ class Routes extends Component {
             <Menu />
           </Switch>
           <PrivateRoute exact path="/Sale" component={Sale} />
+          <PrivateRoute exact path="/pdfdemo" component={pdfdemo} />
+          <PrivateRoute exact path="/ReportViewer" component={ReportViewer} />
+          <PrivateRoute exact path="/SalesRepRedirect" component={SalesRepRedirect} />
+          <PrivateRoute exact path="/HandheldRepRedirect" component={HandheldRepRedirect} />
           <PrivateRoute exact path="/Search" component={Search} />
           <PrivateRoute exact path="/Demo" component={Demo} />
+          <PrivateRoute exact path="/ActionDemo" component={ActionDemo} />
+          {/* <PrivateRoute exact path="/showReport" component={ShowReport} /> */}
+          <PrivateRoute exact path="/ReportFilter" component={ReportFilter} />
+          {/* <PrivateRoute exact path="/TicketsComponent" component={TicketsComponent} /> */}
           <PrivateRoute exact path="/Home" component={Home} />
           <PrivateRoute exact path="/about" component={About} />
           <PrivateRoute exact path="/UserList" component={UserList} />
@@ -108,7 +126,7 @@ class Routes extends Component {
           <PrivateRoute exact path="/EntityStatus" component={EntityStatus} />
           <PrivateRoute exact path="/EntityList" component={EntityList} />
           <PrivateRoute exact path="/Entity" component={Entity} />
-          <PrivateRoute exact path="/Reports" component={Reports} />
+          {/* <PrivateRoute exact path="/Reports" component={Reports} /> */}
           {/* <Route exact path="/user" render={(props) => (<PrivateRoute component={User} />)} /> */}
           {/* <PrivateRoute exact path="/user" render={(props) => (<User {...props} userCode={'GM03'} />  )} /> */}
         </div>

@@ -10,17 +10,16 @@ import {
 } from "../actions/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select from "react-select";
-
 import { faTrashAlt, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import { AddDepModal } from "../components/AddDepModal";
-
+import context from "react-bootstrap/esm/AccordionContext";
 const ActionGroup = () => {
   let history = useHistory();
   const contextType = useContext(AuthContext);
-
   const [msg, setMsg] = useState("");
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
+  const [color, setColor] = useState("");
   const [name, setName] = useState("");
   const [timeout, settimeout] = useState("");
   const [entityCount, setEntityCount] = useState("");
@@ -29,23 +28,24 @@ const ActionGroup = () => {
   const [editActionGroup, setEditActionGroup] = useState(false);
   const [buttonClicked, setButtonClicked] = useState("");
   const [variant, setVariant] = useState();
-
+  
   // general
   useEffect(() => {
     if (contextType.currentMsg) {
       setMsg(contextType.currentMsg);
       setVariant(contextType.currentVariant);
+      setVariant(contextType.currentColor);
       contextType.setCurrentMsg("");
       contextType.setCurrentVariant();
+      contextType.setCurrentColor();
     } else {
       setMsg("");
       setVariant(null);
+      setColor(null);
     }
-
     const actionGroupCode = contextType.currentObject
       ? contextType.currentObject
       : "";
-
     async function loadLists() {
       await loadMaterial();
       await loadEntityTypes();
@@ -71,10 +71,8 @@ const ActionGroup = () => {
       // this.myRefs[1].focus();
       setTitle("Edit Action Group");
       setButtonText("Update");
-
       const actionGroupCode = contextType.currentObject;
       const url = "/api/actiongroup/" + actionGroupCode;
-
       fetch(url)
         .then((response) => {
           return response.json();
@@ -110,28 +108,23 @@ const ActionGroup = () => {
       setName(e.target.value);
     }
   }
-
   function resetForm() {
     setName("");
     setEntityCount("");
     setButtonClicked("");
   }
-
   function handleBack() {
     history.goBack();
   }
-
   function updateCountClicked() {
     // setButtonClicked("COUNT");
     updateCount();
   }
-
   const submit = (e) => {
     e.preventDefault();
     // console.log("submit " + selectedLocations);
     // setButtonClicked("UPDATE");
-    // updateCount();
-
+    updateCount();
     console.log("updating");
     const newActionGroup = {
       code,
@@ -146,41 +139,51 @@ const ActionGroup = () => {
       enabled,
       entitycount: entityCount,
     };
-
     if (editActionGroup) {
       console.log("in edit Group");
-
       updateActionGroup(newActionGroup, (res) => {
         if (res.data.success) {
-          setMsg(res.data.msg);
-          setVariant("success");
+     contextType.setCurrentMsg(res.data.msg);
+    contextType.setCurrentVariant("success");
+    contextType.setCurrentColor("alert alert-success");
           handleBack();
           settimeout(() => setMsg(""), 2000);
           resetForm();
         } else {
+          contextType.setCurrentMsg(res.data.msg);
+          contextType.setCurrentVariant("danger");
+          contextType.setCurrentColor("alert alert-success");
+
           setMsg(res.data.msg);
           setVariant("danger");
+          setColor("alert alert-danger")
           setTimeout(() => setMsg(""), 2000);
         }
       });
     } else {
       // Register
       addActionGroup(newActionGroup, (res) => {
+        console.log("in add action Group");
         if (res.data.success) {
-          setMsg(res.data.msg);
-          setVariant("success");
+          console.log("data is success");
+          contextType.setCurrentMsg(res.data.msg);
+          contextType.setCurrentVariant("success");
+          contextType.setCurrentColor("alert alert-success")
           handleBack();
           settimeout(() => setMsg(""), 2000);
           resetForm();
         } else {
+          console.log("not success");
+          contextType.setCurrentColor(res.data.msg);
+          contextType.setCurrentVariant("alert");
           setMsg(res.data.msg);
+          setColor("alert alert-danger");
           setVariant("danger");
           setTimeout(() => setMsg(""), 2000);
         }
       });
     }
   };
-
   const updateCount = () => {
     let qs = "";
     let count = 0;
@@ -191,43 +194,36 @@ const ActionGroup = () => {
     if (selectedEntityTypes.length > 0) {
       qs = qs + "&entitytype=" + selectedEntityTypes;
     }
-
     if (selectedEntitySubTypes.length > 0) {
       qs = qs + "&subtype=" + selectedEntitySubTypes;
     }
-
     if (selectedLocations.length > 0) {
       qs = qs + "&location=" + selectedLocations;
     }
-
     if (selectedWarehouses.length > 0) {
       qs = qs + "&warehouse=" + selectedWarehouses;
     }
     if (selectedLocationAreas.length > 0) {
       qs = qs + "&locationarea=" + selectedLocationAreas;
     }
-
     if (selectedEntityStatuses.length > 0) {
       qs = qs + "&status=" + selectedEntityStatuses;
     }
-
     const url = "/api/actiongroup/find?" + qs.substr(1);
     fetch(url)
       .then((response) => {
         return response.json();
       })
       .then(async (data) => {
-        // console.log(data);
+        console.log(data);
         count = data.length;
         // console.log("datalength:" + count);
-
         setEntityCount(count);
       })
       .catch((err) => {
         setEntityCount("");
       });
   };
-
   // entity subtypes
   const [entitySubTypeOptions, setEntitySubTypeOptions] = useState([]);
   const [
@@ -235,10 +231,8 @@ const ActionGroup = () => {
     setSelectedEntitySubTypeOptions,
   ] = useState([]);
   const [selectedEntitySubTypes, setSelectedEntitySubTypes] = useState("");
-
   const loadEntitySubTypes = async () => {
     const result = await axios.get(contextType.dbUrl + "entitysubtype");
-
     let entitysubtypesFromAPI = result.data.map((etsub) => {
       return { value: etsub.est_code, label: etsub.est_name, id: etsub._id };
     });
@@ -246,7 +240,6 @@ const ActionGroup = () => {
       [{ id: "0", value: "", label: "" }].concat(entitysubtypesFromAPI)
     );
   };
-
   useEffect(() => {
     let myCode = "";
     if (selectedEntitySubTypeOptions != null) {
@@ -263,7 +256,6 @@ const ActionGroup = () => {
   function handleEntitySubTypeChange(event) {
     setSelectedEntitySubTypeOptions(event);
   }
-
   const loadSelectedEntitySubTypes = async (selValues) => {
     console.log("loadSelectedEntitySubTypes:" + selValues);
     if (selValues.trim().length == 0) return;
@@ -289,14 +281,12 @@ const ActionGroup = () => {
     console.log("Selected values: " + selectedValues);
     setSelectedEntitySubTypeOptions(selectedValues);
   };
-
   // entity types
   const [entityTypeOptions, setEntityTypeOptions] = useState([]);
   const [selectedEntityTypeOptions, setSelectedEntityTypeOptions] = useState(
     []
   );
   const [selectedEntityTypes, setSelectedEntityTypes] = useState("");
-
   const loadEntityTypes = async () => {
     const result = await axios.get(contextType.dbUrl + "entitytype");
 
@@ -307,7 +297,6 @@ const ActionGroup = () => {
       [{ id: "0", value: "", label: "" }].concat(entitytypesFromAPI)
     );
   };
-
   useEffect(() => {
     let myCode = "";
     if (selectedEntityTypeOptions != null) {
@@ -320,11 +309,9 @@ const ActionGroup = () => {
       setSelectedEntityTypes("");
     }
   }, [selectedEntityTypeOptions]);
-
   function handleEntityTypeChange(event) {
     setSelectedEntityTypeOptions(event);
   }
-
   const loadSelectedEntityTypes = async (selValues) => {
     console.log("loadSelectedEntityTypes:" + selValues);
     if (selValues.trim().length == 0) return;
@@ -332,7 +319,6 @@ const ActionGroup = () => {
     console.log("SelArray: " + selArray);
     let selectedValues = [];
     console.log("EntityTypeOptions: " + entityTypeOptions);
-
     entityTypeOptions.map((ett) => {
       if (selArray.includes(ett.value + "")) {
         selectedValues.push({
@@ -348,7 +334,6 @@ const ActionGroup = () => {
     console.log("Selected values: " + selectedValues);
     setSelectedEntityTypeOptions(selectedValues);
   };
-
   // Warehouses
   const [warehouseOptions, setWarehouseOptions] = useState([]);
   const [selectedWarehouseOptions, setSelectedWarehouseOptions] = useState([]);
@@ -364,7 +349,6 @@ const ActionGroup = () => {
       [{ id: "0", value: "", label: "" }].concat(warehousesFromAPI)
     );
   };
-
   useEffect(() => {
     let myCode = "";
     if (selectedWarehouseOptions != null) {
@@ -381,7 +365,6 @@ const ActionGroup = () => {
   function handleWarehouseChange(event) {
     setSelectedWarehouseOptions(event);
   }
-
   const loadSelectedWarehouses = async (selValues) => {
     console.log("loadSelectedWarehouses:" + selValues);
     if (selValues.trim().length == 0) return;
@@ -405,7 +388,6 @@ const ActionGroup = () => {
     console.log("Selected values: " + selectedValues);
     setSelectedWarehouseOptions(selectedValues);
   };
-
   //location Area
   const [locationAreaOptions, setLocationAreaOptions] = useState([]);
   const [
@@ -423,7 +405,6 @@ const ActionGroup = () => {
       [{ id: "0", value: "", label: "" }].concat(locationareasFromAPI)
     );
   };
-
   useEffect(() => {
     let myCode = "";
     if (selectedLocationAreaOptions != null) {
@@ -436,11 +417,9 @@ const ActionGroup = () => {
       setSelectedLocationAreas("");
     }
   }, [selectedLocationAreaOptions]);
-
   function handleLocationAreaChange(event) {
     setSelectedLocationAreaOptions(event);
   }
-
   const loadSelectedLocationAreas = async (selValues) => {
     console.log("loadSelectedLocationAreas:" + selValues);
     if (selValues.trim().length == 0) return;
@@ -480,7 +459,6 @@ const ActionGroup = () => {
       [{ id: "0", value: "", label: "" }].concat(locationFromAPI)
     );
   };
-
   useEffect(() => {
     let myCode = "";
     if (selectedLocationOptions != null) {
@@ -494,11 +472,9 @@ const ActionGroup = () => {
       setSelectedLocation("");
     }
   }, [selectedLocationOptions]);
-
   function handleLocationChange(event) {
     setSelectedLocationOptions(event);
   }
-
   const loadSelectedLocations = async (selValues) => {
     console.log("loadSelectedLocations:" + selValues);
     if (selValues.trim().length == 0) return;
@@ -530,7 +506,6 @@ const ActionGroup = () => {
     setSelectedEntityStatusOptions,
   ] = useState([]);
   const [selectedEntityStatuses, setSelectedEntityStatus] = useState("");
-
   const loadEntityStatus = async () => {
     const result = await axios.get(contextType.dbUrl + "entitystatus");
 
@@ -541,7 +516,6 @@ const ActionGroup = () => {
       [{ id: "0", value: "", label: "" }].concat(entitystatusFromAPI)
     );
   };
-
   useEffect(() => {
     let myCode = "";
     if (selectedEntityStatusOptions != null) {
@@ -554,11 +528,9 @@ const ActionGroup = () => {
       setSelectedEntityStatus("");
     }
   }, [selectedEntityStatusOptions]);
-
   function handleEntityStatusChange(event) {
     setSelectedEntityStatusOptions(event);
   }
-
   const loadSelectedEntityStatuses = async (selValues) => {
     console.log("loadSelectedEntityStatuses:" + selValues);
     if (selValues.trim().length == 0) return;
@@ -566,7 +538,6 @@ const ActionGroup = () => {
     console.log("SelArray: " + selArray);
     let selectedValues = [];
     console.log("EntityStatusOptions: " + entityStatusOptions);
-
     entityStatusOptions.map((est) => {
       if (selArray.includes(est.value + "")) {
         selectedValues.push({
@@ -582,12 +553,10 @@ const ActionGroup = () => {
     console.log("Selected values: " + selectedValues);
     setSelectedEntityStatusOptions(selectedValues);
   };
-
   //material
   const [materialOptions, setMaterialOptions] = useState([]);
   const [selectedMaterialOptions, setSelectedMaterialOptions] = useState([]);
   const [selectedMaterials, setSelectedMaterial] = useState("");
-
   const loadMaterial = async () => {
     const result = await axios.get(contextType.dbUrl + "material");
 
@@ -599,7 +568,6 @@ const ActionGroup = () => {
       [{ id: "0", value: "", label: "" }].concat(materialFromAPI)
     );
   };
-
   useEffect(() => {
     let myCode = "";
     console.log("useEffect -01");
@@ -615,11 +583,9 @@ const ActionGroup = () => {
       console.log("null");
     }
   }, [selectedMaterialOptions]);
-
   function handleMaterialChange(event) {
     setSelectedMaterialOptions(event);
   }
-
   const loadSelectedMaterials = async (selValues) => {
     console.log("loadSelectedMaterials:" + selValues);
     if (selValues.trim().length == 0) return;
@@ -627,7 +593,6 @@ const ActionGroup = () => {
     console.log("SelArray: " + selArray);
     let selectedValues = [];
     console.log("MaterialOptions: " + materialOptions);
-
     materialOptions.map((mat) => {
       if (selArray.includes(mat.value + "")) {
         selectedValues.push({
@@ -661,13 +626,31 @@ const ActionGroup = () => {
           <h4 style={{ paddingTop: "5px", fontSize: "20px" }}>{title}</h4>
         </center>
       </div>
-      {msg ? <Alert variant={variant}>{msg}</Alert> : null}
+      {/* {msg ? <Alert variant={variant}>{msg}</Alert> : null} */}
 
       <div
         className="container header detail "
         style={{ borderRadius: "0px 0px 20px 20px" }}
       >
+          {msg ? (
+                // <Alert variant={this.state.variant}>{this.state.msg}</Alert>
+                <div class={color}>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-hidden="true"
+                    color={variant}
+                  >
+                    &times;
+                  </button>
+                  <h4>
+                    <i class="icon fa fa-info"></i> {msg}
+                  </h4>
+                </div>
+              ) : null}
         {/* <center>
+        
           <h4 style={{ paddingTop: "5px", fontSize: "20px" }}>
               {title}
               </h4>
@@ -683,6 +666,7 @@ const ActionGroup = () => {
                 type="text"
                 name="code"
                 value={code}
+                disabled={setEditActionGroup ? true : false}
                 className="detail__input textsmall"
                 onChange={onChange}
                 required
@@ -690,20 +674,26 @@ const ActionGroup = () => {
             </div>
           </span>
         </div>
-        <div className="form-group ">
+          <div className="form-group ">
           <label className="labelstd">Description:</label>
           <span className="myspan ">
             <div className="form__div ">
+           
               <input
                 type="text"
                 name="name"
                 value={name}
                 className="detail__input "
+               
                 onChange={onChange}
-              />
+                required
+              >
+                </input>
+               
             </div>
           </span>
         </div>
+       
 
         <div style={{ display: "flex", marginBottom: "10px" }}>
           {/* <div style={{display:'flex', flexDirection: ''}}> */}
@@ -736,7 +726,6 @@ const ActionGroup = () => {
         <div style={{ display: "flex", marginBottom: "10px" }}>
           {/* <div style={{display:'flex', flexDirection: ''}}> */}
           <label className="labelstd">Entity Sub Type:</label>
-
           <Select
             className="detail__input"
             value={selectedEntitySubTypeOptions}
@@ -746,11 +735,9 @@ const ActionGroup = () => {
             isMulti
           />
         </div>
-
         <div style={{ display: "flex", marginBottom: "10px" }}>
           {/* <div style={{display:'flex', flexDirection: ''}}> */}
           <label className="labelstd">Warehouse:</label>
-
           <Select
             className="detail__input"
             value={selectedWarehouseOptions}
@@ -760,11 +747,9 @@ const ActionGroup = () => {
             isMulti
           />
         </div>
-
         <div style={{ display: "flex", marginBottom: "10px" }}>
           {/* <div style={{display:'flex', flexDirection: ''}}> */}
           <label className="labelstd">Location Area:</label>
-
           <Select
             className="detail__input"
             value={selectedLocationAreaOptions}
@@ -774,11 +759,9 @@ const ActionGroup = () => {
             isMulti
           />
         </div>
-
         <div style={{ display: "flex", marginBottom: "10px" }}>
           {/* <div style={{display:'flex', flexDirection: ''}}> */}
           <label className="labelstd">Location:</label>
-
           <Select
             className="detail__input"
             value={selectedLocationOptions}
@@ -791,7 +774,6 @@ const ActionGroup = () => {
         <div style={{ display: "flex", marginBottom: "10px" }}>
           {/* <div style={{display:'flex', flexDirection: ''}}> */}
           <label className="labelstd">Entity Status:</label>
-
           <Select
             className="detail__input"
             value={selectedEntityStatusOptions}
@@ -801,7 +783,6 @@ const ActionGroup = () => {
             isMulti
           />
         </div>
-
         <label className="labelstd">Enabled:</label>
         <input
           // className=" fadeIn second cm-toggle"
@@ -814,7 +795,6 @@ const ActionGroup = () => {
             setEnabled(event.target.checked);
           }}
         ></input>
-
         <br></br>
         <br></br>
         <br></br>
@@ -829,7 +809,6 @@ const ActionGroup = () => {
           </button>
         </center>
         <br></br>
-
         <div style={{ marginBottom: "5px" }}>
           <label className="labelstd">Entity Count:</label>
           <input
@@ -839,7 +818,6 @@ const ActionGroup = () => {
             className="detail__input textsmall"
             readOnly
           />
-
           <button
             type="submit"
             className="btn btn-primary"
@@ -849,7 +827,6 @@ const ActionGroup = () => {
             Refresh
           </button>
         </div>
-
         <br></br>
       </div>
     </div>

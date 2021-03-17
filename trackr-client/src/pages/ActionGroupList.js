@@ -7,17 +7,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faTrashAlt, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import { AddDepModal } from "../components/AddDepModal";
-
 const ActionGroupList = () => {
   let history = useHistory();
   const contextType = useContext(AuthContext);
-
   const [actions, setActionGroup] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [msg, setMsg] = useState("");
+  const [color, setColor] = useState();
   const [variant, setVariant] = useState();
   const [currentGroup, setCurrentGroup] = useState("");
-
   let closeModal = () => {
     setShowModal(false);
   };
@@ -25,16 +23,18 @@ const ActionGroupList = () => {
     const result = await axios.get(contextType.dbUrl + "actiongroup");
     setActionGroup(result.data);
   };
-
   useEffect(() => {
     if (contextType.currentMsg) {
       setMsg(contextType.currentMsg);
       setVariant(contextType.currentVariant);
+      setColor(contextType.currentColor);
       contextType.setCurrentMsg("");
       contextType.setCurrentVariant();
+      contextType.setCurrentColor();
     } else {
       setMsg("");
       setVariant(null);
+      setColor(null);
     }
     loadActionGroups();
     const timer = setTimeout(() => {
@@ -42,12 +42,10 @@ const ActionGroupList = () => {
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
-
   const addActionGroup = async () => {
     contextType.setCurrentObject(null);
     history.push("/ActionGroup");
   };
-
   const editActionGroup = async (act_code) => {
     console.log(`Edit ${act_code}`);
     contextType.setCurrentObject(act_code);
@@ -59,18 +57,33 @@ const ActionGroupList = () => {
     setCurrentGroup(act_code);
     setShowModal(true);
   };
-
   const deleteActionGroup = async (code) => {
     console.log("in deleteUser " + code);
     setShowModal(false);
     await axios.delete(contextType.dbUrl +`actiongroup/${code}`);
     loadActionGroups();
   };
-
   return (
     <React.Fragment>
       <div className="scroll" style={{ overflowX: "auto" }}>
-        {msg ? <Alert variant={variant}>{msg}</Alert> : null}
+        {/* {msg ? <Alert variant={variant}>{msg}</Alert> : null} */}
+        {msg ? (
+        // <Alert variant={variant}>{msg}</Alert>
+        <div class={color}>
+          <button
+            className="alert"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+          <h4>
+            <center>{msg}</center>
+          </h4>
+        </div>
+      ) : null}
 
         <div className="   ">
           {/* <center>
@@ -114,7 +127,6 @@ const ActionGroupList = () => {
                   <th scope="col" style={{ width: "450px" }}>
                     Name
                   </th>
-
                   <th scope="col" style={{ width: "150px" }}>
                     Enabled
                   </th>
@@ -197,13 +209,13 @@ const ActionGroupList = () => {
                 >
                   Add Action Group
                 </button>
-                <button
+                {/* <button
                   className="btn btn-primary"
                   style={{ width: "200px", height: "35px", marginLeft: "10px" }}
                   onClick={() => addActionGroup()}
                 >
                   Update Entity Count
-                </button>
+                </button> */}
               </center>
             </div>
           </div>

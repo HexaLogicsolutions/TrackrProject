@@ -23,13 +23,17 @@ router.post("/", (req, res) => {
     entitycount,
   } = req.body;
   // return error if code has a value
-  if (code) {
-    res.json({ success: false, msg: "Invalid parameters" });
-  }
+  // if (code) {
+  //   return res.json({ success: false, msg: "Invalid parameters" });
+  // }
+  
 
   if (!name) {
-    res.json({ success: false, msg: "Please enter all the data" });
+    return res.json({ success: false, msg: "Please enter all the data" });
   }
+  // if (!code || !name || !email || !password || !group || !active) {
+  //   res.json({ success: false, msg: "please enter all the data" });
+  // }
 
   ActionGroup.findOne({ act_name: name })
     .collation({ locale: "en_US", strength: 2 })

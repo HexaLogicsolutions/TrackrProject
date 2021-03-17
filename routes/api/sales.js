@@ -54,6 +54,70 @@ router.get("/sale-quantity-by-material", (req, res) => {
       console.log(err);
     });
 });
+router.get("/sale-report", (req, res) => {
+  console.log("in sale-reportxxx()");
+  const fromDt = req.query.fromDt;
+  const toDt = req.query.toDt;
+  const subtype = req.query.subtype;
+  const warehouse = req.query.warehouse;
+  const material = req.query.material;
+
+  // console.log("from:" + fromDt);
+  // console.log("to:" + toDt);
+
+  let dateFilter = {};
+  if (fromDt && toDt) {
+    dateFilter = {
+      sal_date: {
+        $gte: fromDt,
+        $lt: toDt,
+      },
+    };
+  }
+
+  let subTypeFilter = {};
+  console.log("subtype:" + subtype);
+  if (subtype) {
+    const newsubtype = subtype.split("|");
+    subTypeFilter = {
+      sal_subtype: { $in: newsubtype },
+    };
+    console.log("subTypeFilter:" + subTypeFilter);
+  }
+
+  let warehouseFilter = {};
+  if (warehouse) {
+    const newWarehouse = warehouse.split("|");
+    warehouseFilter = {
+      sal_warehouse: { $in: newWarehouse },
+    };
+  }
+
+  let materialFilter = {};
+  if (material) {
+    const newmaterial = material.split("|");
+    materialFilter = {
+      sal_material: { $in: newmaterial },
+    };
+  }
+  var mysort = { hht_datetime: 1 };
+  Sale.find({
+    $and: [
+      subTypeFilter,
+      materialFilter,
+      dateFilter,
+      warehouseFilter,
+    ],
+  }).sort(mysort)
+    .then((sale) => {
+      res.send(sale);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+
 
 router.get("/sale-quantity-by-subtype", (req, res) => {
   console.log("in sale-quantity-by-subtype()");

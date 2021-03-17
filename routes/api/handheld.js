@@ -232,6 +232,7 @@ router.get("/handheld-scan", (req, res) => {
 
   const mydata = HandheldTran.aggregate([
     {
+      
       $match: {
         $and: [
           {
@@ -265,7 +266,7 @@ router.get("/handheld-scan", (req, res) => {
         },
       },
     },
-    { $sort: {_id: 1}}
+    { $sort: { _id: 1 } },
     // { $group: { _id: "$ent_material", TotalMaterial: { $sum: 1 } } },
   ])
     .then((entity) => {
@@ -278,49 +279,47 @@ router.get("/handheld-scan", (req, res) => {
     });
 });
 
-
 // router.get("/scans-by-date", (req, res) => {
-  router.get("/handheld-induction", (req, res) => {
-    const fromDt = req.query.fromDt;
-    const toDt = req.query.toDt;
-  
-    const mydata = HandheldTran.aggregate([
-      {
-        $match: {
-          $and: [
-            {
-              hht_datetime: {
-                $gte: new Date(fromDt),
-                $lt: new Date(toDt),
-              },
-            },
-            {
-              hht_operation: "I",
-            },
-          ],
-        },
-      },
-      {
-        $group: {
-          _id: "$hht_datetime",
-          inducted: {
-            $sum: { $size: "$hht_scanned_entities" },
-          },
-        },
-      },
-      { $sort: {_id: 1}}
-      // { $group: { _id: "$ent_material", TotalMaterial: { $sum: 1 } } },
-    ])
-      .then((entity) => {
-        if (entity.length == 0) res.send("Not found");
-        else res.send(entity);
-        // console.log("Totolmaterial:" + mydata);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+router.get("/handheld-induction", (req, res) => {
+  const fromDt = req.query.fromDt;
+  const toDt = req.query.toDt;
 
+  const mydata = HandheldTran.aggregate([
+    {
+      $match: {
+        $and: [
+          {
+            hht_datetime: {
+              $gte: new Date(fromDt),
+              $lt: new Date(toDt),
+            },
+          },
+          {
+            hht_operation: "I",
+          },
+        ],
+      },
+    },
+    {
+      $group: {
+        _id: "$hht_datetime",
+        inducted: {
+          $sum: { $size: "$hht_scanned_entities" },
+        },
+      },
+    },
+    { $sort: { _id: 1 } },
+    // { $group: { _id: "$ent_material", TotalMaterial: { $sum: 1 } } },
+  ])
+    .then((entity) => {
+      if (entity.length == 0) res.send("Not found");
+      else res.send(entity);
+      // console.log("Totolmaterial:" + mydata);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 router.post("/login", (req, res) => {
   console.log("in hh login");
@@ -476,6 +475,69 @@ router.post("/login", (req, res) => {
         console.log(err);
       });
   }
+});
+
+router.get("/hh-report", (req, res) => {
+  const fromDt = req.query.fromDt;
+  const toDt = req.query.toDt;
+
+  const mydata = HandheldTran.aggregate([
+    {
+      $lookup: {
+        from: "action_group",
+        localField: "hht_action_group",
+        foreignField: "act_code",
+        as: "mydata",
+      },
+    },
+    {
+      $match: {
+        $and: [
+          {
+            hht_datetime: {
+              $gte: new Date(fromDt),
+              $lt: new Date(toDt),
+            },
+          },
+        ],
+      },
+    },
+    {
+      $group: {
+        _id: {
+          dateTime: "$hht_datetime",
+          userCode: "$hht_user",
+          userName: "$hht_user_name",
+          operation: "$hht_operation",
+          actionGroup: "$mydata.act_name"
+        },
+        missing: {
+          $sum: { $size: "$hht_missing_entities" },
+        },
+        scanned: {
+          $sum: { $size: "$hht_scanned_entities" },
+        },
+        total: {
+          $sum: {
+            $add: [
+              { $size: "$hht_scanned_entities" },
+              { $size: "$hht_missing_entities" },
+            ],
+          },
+        },
+      },
+    },
+    { $sort: { _id: 1 } },
+    // { $group: { _id: "$ent_material", TotalMaterial: { $sum: 1 } } },
+  ])
+    .then((entity) => {
+      if (entity.length == 0) res.send("Not found");
+      else res.send(entity);
+      // console.log("Totolmaterial:" + mydata);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 router.get("/", (req, res) => {
