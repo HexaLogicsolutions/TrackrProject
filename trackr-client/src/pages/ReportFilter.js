@@ -181,7 +181,7 @@ const ReportFilter = () => {
     // rptHeading
     // rptData
     // contextType.rptHeading="Sales Report";
-    localStorage.setItem("rptHeading", "Sales Report New");
+    localStorage.setItem("rptHeading", "Sales Report ");
     localStorage.setItem("rptData", JSON.stringify(response.data));
     // contextType.rptData =response.data;
     history.push({

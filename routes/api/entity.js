@@ -83,7 +83,7 @@ router.get("/current-stock-by-material", (req, res) => {
   const mydata = Entity.aggregate([
     {
       $lookup: {
-        from: "material",
+        from: "material", 
         localField: "ent_material",
         foreignField: "mat_code",
         as: "mydata",

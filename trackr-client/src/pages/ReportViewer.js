@@ -9,7 +9,7 @@ export const ReportViewer = () => {
   const componentRef = useRef();
 
   useEffect(() => {
-    setIsSalesReport(localStorage.getItem("rptHeading")==="Sales Report New");
+    setIsSalesReport(localStorage.getItem("rptHeading")==="Sales Report ");
     setIsHandheldReport(localStorage.getItem("rptHeading")==="Handheld Report");
   }, []);
 

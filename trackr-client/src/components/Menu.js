@@ -9,6 +9,9 @@ import {
   FaMobileAlt,
   FaRegUser,
   FaBuilding,
+  FaSeedling,
+  FaLayerGroup,
+  FaSellcast
 } from "react-icons/fa";
 import {
   BiAddToQueue,
@@ -17,12 +20,17 @@ import {
   BiGroup,
   BiMessageSquareAdd,
 } from "react-icons/bi";
-import { BsSubtract, BsSearch } from "react-icons/bs";
+import { BsSubtract, BsSearch,BsPieChartFill } from "react-icons/bs";
+import { FcOrgUnit } from "react-icons/fc";
 import { TiExport } from "react-icons/ti";
-import { GrStatusCriticalSmall } from "react-icons/gr";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { GrConfigure } from "react-icons/gr";
+import {RiDashboardFill } from "react-icons/ri";
+import { GrStatusCriticalSmall,GrHostMaintenance } from "react-icons/gr";
 import { MdAssignmentReturn } from "react-icons/md";
-import { AiFillAppstore } from "react-icons/ai";
-import { CgShutterstock } from "react-icons/cg";
+import { AiFillAppstore,AiFillGolden } from "react-icons/ai";
+import {SiAboutDotMe} from "react-icons/si";
+import { CgShutterstock ,CgUserlane} from "react-icons/cg";
 import { IoAddCircleSharp } from "react-icons/io";
 export default class menu extends Component {
   static contextType = AuthContext;
@@ -97,7 +105,7 @@ export default class menu extends Component {
       </li> */}
               <li>
                 <Link to="/Home">
-                  <i className="fa fa-dashboard" /> <span>Dashboard</span>
+                <RiDashboardFill/>&nbsp;&nbsp;<span>Dashboard</span>
                 </Link>
               </li>
               {/* <li className="treeview">
@@ -127,7 +135,7 @@ export default class menu extends Component {
               {/* Gaurang mishra */}
               <li className="treeview">
                 <Link to="#">
-                  <i className="fa fa-pie-chart" />
+                <BsPieChartFill/>&nbsp;&nbsp;
                   <span> Config</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
@@ -153,7 +161,7 @@ export default class menu extends Component {
               </li>
               <li className="treeview">
                 <a href="#">
-                  <i className="fa fa-laptop" />
+                <FaSeedling/>&nbsp;&nbsp;
                   <span>Maintenance</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
@@ -196,7 +204,7 @@ export default class menu extends Component {
 
               <li>
                 <Link to="/ActionGroupList">
-                  <i className="fa fa-dashboard" /> <span>Action Groups</span>
+                  <FaLayerGroup/>&nbsp;&nbsp; <span>Action Groups</span>
                 </Link>
               </li>
               {/* <li>
@@ -207,7 +215,7 @@ export default class menu extends Component {
               </li> */}
               <li className="treeview">
                 <a href="#">
-                  <i className="fa fa-edit" /> <span>Entity</span>
+                <AiFillGolden/>&nbsp;&nbsp;<span>Entity</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
                   </span>
@@ -227,7 +235,7 @@ export default class menu extends Component {
               </li>
               <li className="treeview">
                 <a href="#">
-                  <i className="fa fa-table" /> <span>Sales</span>
+                <FaSellcast/>&nbsp;&nbsp; <span>Sales</span>
                   <span className="pull-right-container">
                     <i className="fa fa-angle-left pull-right" />
                   </span>
@@ -292,8 +300,8 @@ export default class menu extends Component {
               </li>
 
               <li>
-                <a href="https://adminlte.io/docs">
-                  <i className="fa fa-book" /> <span>About</span>
+                <a href="#">
+                <CgUserlane/>&nbsp;&nbsp; <span>About</span>
                 </a>
               </li>
             </ul>
