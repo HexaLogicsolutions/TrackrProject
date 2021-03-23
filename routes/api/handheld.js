@@ -531,7 +531,7 @@ router.get("/hh-report", (req, res) => {
     // { $group: { _id: "$ent_material", TotalMaterial: { $sum: 1 } } },
   ])
     .then((entity) => {
-      if (entity.length == 0) res.send("Not found");
+      if (entity.length == 0) res.send([]);
       else res.send(entity);
       // console.log("Totolmaterial:" + mydata);
     })

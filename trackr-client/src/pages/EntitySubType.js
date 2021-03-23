@@ -86,7 +86,7 @@ class EntitySubType extends Component {
 
     if (this.state.editEntitySubType) {
       // this.myRefs[1].focus();
-      this.state.title = "Edit EntitySubType";
+      this.state.title = "Edit Entity SubType";
       this.state.buttonText = "Update";
 
       //   console.log("entittysubtype Code: " + userCode);
@@ -111,7 +111,7 @@ class EntitySubType extends Component {
         });
     } else {
       // this.myRefs[1].focus();
-      this.state.title = "New Entitysubtype";
+      this.state.title = "New Entity Subtype";
       this.state.buttonText = "Add Entitysubtype";
     }
   }

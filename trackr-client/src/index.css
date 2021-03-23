@@ -26,9 +26,9 @@ td {
   text-align: left;
   padding: 8px;
 }
-tr:nth-child(even) {
+/* tr:nth-child(even) {
   background-color: #f2f2f2;
-}
+} */
 
 .login-box-body {
   border-radius: 14px;
@@ -104,6 +104,9 @@ tr:nth-child(even) {
   /* .loglabel{
   width: 585px;
 } */
+.width{
+  width: 800px;
+}
 .report-label
 {
   width: 120px;
@@ -479,8 +482,12 @@ margin-left: 5px;
  
   /* .select{
    
+    
     margin-left: -50px;
   } */
+  .width{
+    width: 400px;
+  }
   .report-label{
     width: 100px;
   margin-left: 5px;
@@ -1010,3 +1017,38 @@ input.largerCheckbox {
     } */
  
   @media print { html, body { height: initial !important; overflow: initial !important; }}
+.align-right
+{
+  text-align: right;
+
+}
+
+.center-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+ 
+  
+}
+.mybutton{
+  display:inline-block;
+ 
+}
+.inline { 
+  border: 1px solid red;
+  margin:10px;
+  float:left;/*Add float left*/
+  margin :10px;
+}
+/* .mytable {
+  margin: auto;
+  width: 50% !important; 
+} */
+/* .mytable{
+  table-layout: fixed;
+  width: 900px;
+} */
+.td-50{
+  width: 50%;
+}

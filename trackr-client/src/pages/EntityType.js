@@ -25,7 +25,6 @@ class EntityType extends Component {
       token: localStorage.getItem("token"),
     };
   }
-
   onChange = (e) => {
     if (e.target.name === "code") {
       this.setState({
@@ -37,7 +36,6 @@ class EntityType extends Component {
       });
     }
   };
-
   resetForm() {
     this.setState({
       name: "",
@@ -45,33 +43,10 @@ class EntityType extends Component {
       active: false,
     });
   }
-
   handleBack() {
     this.props.history.goBack();
   }
-
   async componentDidMount() {
-    console.log(this.myRefs);
-
-    // const url = "/api/entitytype";
-    // fetch(url)
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     let entitytypeFromAPI = data.map((ett) => {
-    //       return { value: ett.ett_code, display: ett.ett_name };
-    //     });
-    //     this.setState({
-    //       groups: [{ id: "0", value: "", display: "" }].concat(
-    //         entitytypeFromAPI
-    //       ),
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
     console.log(this.context.currentObject);
 
     const ettcode = this.context.currentObject
@@ -81,8 +56,12 @@ class EntityType extends Component {
 
     if (this.state.editEntityType) {
       this.myRefs[1].focus();
-      this.state.title = "Edit Entity Type";
-      this.state.buttonText = "Update";
+      this.setState({
+        title : "Edit Entity Type",
+        buttonText : "Update",
+      });
+      // this.state.title = "Edit Entity Type";
+      // this.state.buttonText = "Update";
 
       const url = "/api/entitytype/" + ettcode;
 
@@ -102,9 +81,14 @@ class EntityType extends Component {
           console.log(error);
         });
     } else {
-      // this.myRefs[1].focus();
-      this.state.title = "New Entity Type";
-      this.state.buttonText = "Add";
+      this.myRefs[0].focus();
+      console.log("add entity")
+      // this.state.title = "New Entity Type";
+      // this.state.buttonText = "Add";
+      this.setState({
+        title : "New Entity Type",
+        buttonText : "Add",
+      });
     }
   }
 
@@ -257,7 +241,7 @@ class EntityType extends Component {
                           name="code"
                           ref={this.state.editEntityType ? "this.inputRef" : ""}
                           disabled={this.state.editEntityType ? true : false}
-                          // ref={(el) => (this.myRefs[0] = el)}
+                          ref={(el) => (this.myRefs[1] = el)}
                           value={this.state.code}
                           onChange={this.onChange}
                         />
@@ -274,7 +258,7 @@ class EntityType extends Component {
                             name="name"
                             // type={this.state.editUser ? 'hidden': 'text'}
                             value={this.state.name}
-                            ref={(el) => (this.myRefs[1] = el)}
+                            ref={(el) => (this.myRefs[0] = el)}
                             onChange={(event) => {
                               this.setState({ name: event.target.value });
                             }}
@@ -306,7 +290,7 @@ class EntityType extends Component {
                               }
                               // value={this.state.enabled}
                               checked={this.state.active}
-                              ref={(el) => (this.myRefs[2] = el)}
+                              // ref={(el) => (this.myRefs[2] = el)}
                               onChange={(event) => {
                                 this.setState({ active: event.target.checked });
                               }}

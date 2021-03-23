@@ -3,8 +3,8 @@ import {Helmet} from "react-helmet";
 export default function Demo() {
   return (
     
-<div>
-<Helmet>
+<div className="container">
+{/* <Helmet>
             <title>Nested Title</title>
             <meta name="description" content="Nested component" />
         </Helmet>
@@ -19,7 +19,14 @@ export default function Demo() {
 
 
     </div>
-</center>
+
+</center> */}
+<table>
+  <tr>
+    <td>hii</td>
+    <td>hello</td>
+  </tr>
+</table>
 </div>
 
 // /////////////////
