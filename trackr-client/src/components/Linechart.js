@@ -3,11 +3,11 @@ import { Line } from "react-chartjs-2";
 
 function Linechart() {
   const data = {
-    labels: ["Jan", "Feb", "Mar", "April", "May"],
+    labels: ["Jan", "Feb", "Mar", "April", "May","June", "July", "Aug"],
     datasets: [
       {
         label: "Sales 2020 (M)",
-        data: [3, 2, 2, 1, 5],
+        data: [3, 2, 2, 1, 5,4,3,5],
         borderColor: ["rgba(255, 206, 86, 1)"],
         backgroundColor: ["rgba(250, 250,250, 0)"],
         pointBackgroundColor: "rgba(255, 42, 86, 0.2)",
@@ -15,7 +15,7 @@ function Linechart() {
       },
       {
         label: "Sales 2019 (M)",
-        data: [1, 3, 2, 4, 3],
+        data: [1, 3, 2, 4, 3,2,3,4],
         borderColor: ["rgba(54, 162, 235, 1)"],
         backgroundColor: ["rgba(250, 250,250, 0)"],
         pointBackgroundColor: "rgba(54, 162, 235, 0.2)",

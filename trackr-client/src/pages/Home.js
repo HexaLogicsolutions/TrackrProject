@@ -277,7 +277,7 @@ class Home extends Component {
         for (const dataObj of res.data) {
           labels.push(dataObj._id);
           data.push(dataObj.TotalMaterial);
-          console.log("material:"+dataObj._id);
+          console.log("material:" + dataObj._id);
         }
         if (labels.length == 0) {
           labels.push("No Data Found!");
@@ -350,11 +350,9 @@ class Home extends Component {
             break;
           }
           // future date/
-          
-
 
           var dt1 = new Date(dataObj._id);
-          var dt = new Date(dt1.getTime() - 330*60000);
+          var dt = new Date(dt1.getTime() - 330 * 60000);
           // covert to UTC/GMT
           // var isoDateString = dt1.toISOString();
           // console.log("UTC:"+isoDateString);
@@ -362,17 +360,31 @@ class Home extends Component {
 
           // console.log("Old - "+dt.getHours()+":"+dt.getMinutes());
           // console.log("New - "+dt1.getHours()+":"+dt1.getMinutes());
-//           var format = new SimpleDateFormat("dd MMM hh:mm");
-//           var dateStr = format.format(dt);
-//           console.log("DT: "+dateStr);
+          //           var format = new SimpleDateFormat("dd MMM hh:mm");
+          //           var dateStr = format.format(dt);
+          //           console.log("DT: "+dateStr);
 
-//           var date_format_str = d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00";
-// console.log(date_format_str);
-  var dt3 =  new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,}).format(dt);
-// const today = Date.now();
-console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,}).format(dt));
+          //           var date_format_str = d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00";
+          // console.log(date_format_str);
+          var dt3 = new Intl.DateTimeFormat("en-US", {
+            month: "short",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          }).format(dt);
+          // const today = Date.now();
+          console.log(
+            new Intl.DateTimeFormat("en-US", {
+              month: "short",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            }).format(dt)
+          );
           var hh = dt.getHours();
-          console.log("hh:"+hh);
+          console.log("hh:" + hh);
           if (hh < 10) hh = "0" + hh;
           var mm = dt.getMinutes();
           if (mm < 10) mm = "0" + mm;
@@ -428,8 +440,14 @@ console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', ho
             break;
           }
           var dt1 = new Date(dataObj._id);
-          var dt = new Date(dt1.getTime() - 330*60000);
-          var dt3 =  new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,}).format(dt);
+          var dt = new Date(dt1.getTime() - 330 * 60000);
+          var dt3 = new Intl.DateTimeFormat("en-US", {
+            month: "short",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          }).format(dt);
           var hh = dt.getHours();
           if (hh < 10) hh = "0" + hh;
           var mm = dt.getMinutes();
@@ -475,10 +493,8 @@ console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', ho
             <h1>
               Hexa
               <small>Logic</small>
-         <small className="ver">     Ver: {this.context. APP_VERSION}</small>
+              <small className="ver"> Ver: {this.context.APP_VERSION}</small>
             </h1>
-
-  
 
             <br></br>
             <div className="your-class">
@@ -539,8 +555,11 @@ console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', ho
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-            
-              <div className="chart-500 marginleft " style={{ display: "inline-block" }}>
+
+              <div
+                className="chart-500 marginleft "
+                style={{ display: "inline-block" }}
+              >
                 <div className="info-box">
                   <BarCurrentStockBySubtype
                     labels={this.state.BarCurrentStockBySubtypeLabels}
@@ -565,8 +584,11 @@ console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', ho
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-              
-              <div className="chart-500 marginleft" style={{ display: "inline-block" }}>
+
+              <div
+                className="chart-500 marginleft"
+                style={{ display: "inline-block" }}
+              >
                 <div className="info-box">
                   <BarSaleQuantityBySubtype
                     labels={this.state.BarSaleQuantityBySubtypeLabels}
@@ -591,17 +613,20 @@ console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', ho
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-            
-              <div className="chart-500 marginleft" style={{ display: "inline-block" }}>
+
+              <div
+                className="chart-500 marginleft"
+                style={{ display: "inline-block" }}
+              >
                 <div className="info-box">
-                  {/* <BarSaleAmountBySubtype
+                  <BarSaleAmountBySubtype
                     labels={this.state.BarSaleAmountBySubtypeLabels}
                     data={this.state.BarSaleAmountBySubtypeData}
-                  /> */}
-                  <PieCurrentItemByStatus
+                  />
+                  {/* <PieCurrentItemByStatus
                     labels={this.state.PieCurrentitemByStatusLabels}
                     data={this.state.PieCurrentitemByStatusData}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
@@ -625,8 +650,11 @@ console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', ho
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-          
-              <div className="chart-500  marginleft" style={{ display: "inline-block" }}>
+
+              <div
+                className="chart-500  marginleft"
+                style={{ display: "inline-block" }}
+              >
                 <div className="info-box">
                   <BarHandheldInduction
                     labels={this.state.BarHandheldInductionLabels}
@@ -642,22 +670,46 @@ console.log(new Intl.DateTimeFormat('en-US', { month: 'short',day: '2-digit', ho
                 // backgroundColor: "red",
               }}
             >
-              <div className="chart-500">
+              <div className="chart-500 ">
+                <div className="info-box">
+                  {/* <BarSaleAmountBySubtype
+                    labels={this.state.BarSaleAmountBySubtypeLabels}
+                    data={this.state.BarSaleAmountBySubtypeData}
+                  /> */}
+                  <PieCurrentItemByStatus
+                    labels={this.state.PieCurrentitemByStatusLabels}
+                    data={this.state.PieCurrentitemByStatusData}
+                  />
+                </div>
+              </div>
+              <div
+                className="chart-500 marginleft"
+                style={{ display: "inline-block" }}
+              >
                 <div className="info-box">
                   <Barchart />
                 </div>
               </div>
               {/* style={{ width: "48%", display: "inline-block" }} */}
-            
-              <div className="chart-500  marginleft" style={{ display: "inline-block" }}>
+
+              {/* <div className="chart-500  marginleft" style={{ display: "inline-block" }}>
                 <div className="info-box">
                   <Linechart />
                 </div>
+              </div> */}
+            </div>
+            <div
+              style={{
+                maxWidth: "1100px",
+                width: "95%",
+                // backgroundColor: "red",
+              }}
+            >
+              <div className="info-box chart-1075">
+                <Linechart />
               </div>
             </div>
-      
           </section>
-         
         </div>
       </Fragment>
     );

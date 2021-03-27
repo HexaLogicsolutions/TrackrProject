@@ -90,6 +90,7 @@ router.get("/findcount", (req, res) => {
   const location = req.query.location;
   const material = req.query.material;
   const lastseen = req.query.lastseen;
+  
   let subTypeFilter = {};
   console.log("subtype:" + subtype);
   if (subtype) {

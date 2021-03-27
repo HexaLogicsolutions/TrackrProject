@@ -20,7 +20,7 @@ const BarSaleAmountBySubtype = ({ labels, data }) => {
       labels: labels,
       datasets: [
         {
-          label: "Total Price",
+          // label: "Total Price",
           data: data,
           backgroundColor: contextType.colors,
         },
@@ -37,11 +37,11 @@ const BarSaleAmountBySubtype = ({ labels, data }) => {
       <Bar
       
         data={chartData}
-        height="140px"
+        // height="140px"
         
         options={{
           legend: {
-            display: true,
+            display: false,
           },
         //   plugins: {
             
@@ -50,32 +50,34 @@ const BarSaleAmountBySubtype = ({ labels, data }) => {
         //         color: 'white'
         //     }
         // },
-        //   tooltips: {
-        //     enabled: true
-        // },
-        // hover: {
-        //     animationDuration: 1
-        // },
-        // animation: {
-        // duration: 1,
-        // onComplete: function () {
-        //     var chartInstance = this.chart,
-        //         ctx = chartInstance.ctx;
-        //         ctx.textAlign = 'center';
-        //         ctx.fillStyle = "rgba(0, 0, 0, 1)";
-        //         ctx.textBaseline = 'bottom';
-        //         // Loop through each data in the datasets
-        //         this.data.datasets.forEach(function (dataset, i) {
-        //             var meta = chartInstance.controller.getDatasetMeta(i);
-        //             meta.data.forEach(function (bar, index) {
-        //                 var data = dataset.data[index];
-        //                 ctx.fillText(data, bar._model.x, bar._model.y - 5);
-        //             });
-        //         });
-        //     }
-        // },
+          tooltips: {
+            enabled: true
+        },
+        hover: {
+            animationDuration: 1
+        },
+        animation: {
+        duration: 1,
+        onComplete: function () {
+            var chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+                ctx.textAlign = 'center';
+                ctx.font = "0.8em sans-serif";
+                ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                ctx.textBaseline = 'bottom';
+                // Loop through each data in the datasets
+                this.data.datasets.forEach(function (dataset, i) {
+                    var meta = chartInstance.controller.getDatasetMeta(i);
+                    meta.data.forEach(function (bar, index) {
+                        var data = dataset.data[index];
+                        var formate = data.toLocaleString('en-IN');
+                        ctx.fillText(formate, bar._model.x, bar._model.y +0);
+                    });
+                });
+            }
+        },
           responsive: true,
-          title: { text: "Sale Amount by Subtype (Total: "+total+")", display: true },
+          title: { text: "Sale Amount by Subtype  (Total: " +"₹ "+total.toLocaleString('en-IN')+")",  display: true },
           scales: {
             yAxes: [
               {

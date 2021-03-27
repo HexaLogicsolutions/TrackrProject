@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useReactToPrint } from "react-to-print";
 import { SalesReportToPrint } from "../reports/SalesReportToPrint";
+import { StockReportToPrint } from "../reports/StockReportToPrint";
 import { HandheldReportToPrint } from "../reports/HandheldReportToPrint";
 import { FaPrint } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
@@ -9,6 +10,7 @@ export const ReportViewer = () => {
   console.log("From--" + location.state.fromDt);
   console.log("To--" + location.state.toDt);
   const [isSalesReport, setIsSalesReport] = useState(false);
+  const [isStockReport, setIsStockReport] = useState(false);
   const [isHandheldReport, setIsHandheldReport] = useState(false);
   const componentRef = useRef();
   useEffect(() => {
@@ -17,6 +19,7 @@ export const ReportViewer = () => {
     //   localStorage.getItem("rptHeading") === "Handheld Report"
     // );
     setIsSalesReport(location.state.rptHeading === "Sales Report");
+    setIsStockReport(location.state.rptHeading === "Stock Report");
     setIsHandheldReport(location.state.rptHeading === "Handheld Report");
   }, []);
   // useEffect(() => {
@@ -45,6 +48,7 @@ export const ReportViewer = () => {
       </div>
       {/* </center> */}
       {isSalesReport && <SalesReportToPrint ref={componentRef} params={location.state} />}
+      {isStockReport && <StockReportToPrint ref={componentRef} params={location.state} />}
       {isHandheldReport && (
         <HandheldReportToPrint ref={componentRef} params={location.state} />
       )}

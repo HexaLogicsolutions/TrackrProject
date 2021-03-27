@@ -35,6 +35,7 @@ import Demo from "../pages/Demo";
 import pdfdemo from "../pages/pdfdemo";
 import ReportFilter from "../pages/ReportFilter";
 import SalesRepRedirect from "../redirects/SalesRepRedirect";
+import StockRepRedirect from "../redirects/StockRepRedirect";
 import HandheldRepRedirect from "../redirects/HandheldRepRedirect";
 
 
@@ -82,6 +83,7 @@ class Routes extends Component {
           <PrivateRoute exact path="/pdfdemo" component={pdfdemo} />
           <PrivateRoute exact path="/ReportViewer" component={ReportViewer} />
           <PrivateRoute exact path="/SalesRepRedirect" component={SalesRepRedirect} />
+          <PrivateRoute exact path="/StockRepRedirect" component={StockRepRedirect} />
           <PrivateRoute exact path="/HandheldRepRedirect" component={HandheldRepRedirect} />
           <PrivateRoute exact path="/Search" component={Search} />
           <PrivateRoute exact path="/Demo" component={Demo} />

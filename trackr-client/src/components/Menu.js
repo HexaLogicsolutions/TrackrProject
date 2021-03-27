@@ -282,8 +282,9 @@ export default class menu extends Component {
                 </a>
                 <ul className="treeview-menu">
                   <li>
-                    <a href="/Page2">
-                      <AiFillAppstore />&nbsp; Current Stock
+                    <a href="/StockRepRedirect
+                    ">
+                      <AiFillAppstore />&nbsp;Stock
                     </a>
                   </li>
                   <li>

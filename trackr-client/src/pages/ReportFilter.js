@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Moment from "moment";
-import { SalesReportToPrint } from "../reports/SalesReportToPrint"
+import { SalesReportToPrint } from "../reports/SalesReportToPrint";
 import { useHistory } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 // import generatePDF from "./services/SaleReportGenerator";
@@ -22,11 +22,13 @@ require("isomorphic-fetch");
 
 const ReportFilter = () => {
   const [isSalesReport, setIsSalesReport] = useState(false);
+  const [isStockReport, setIsStockReport] = useState(false);
   const [isHandheldReport, setIsHandheldReport] = useState(false);
   const contextType = useContext(AuthContext);
   const history = useHistory();
   const [data, setData] = useState([]);
   const [sales, setSales] = useState([]);
+  const [stock, setStock] = useState([]);
   const [hh, setHH] = useState([]);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
@@ -35,21 +37,18 @@ const ReportFilter = () => {
   const [repType, setRepType] = useState("");
   const [repTitle, setRepTitle] = useState("");
   // const [d, setD] = useState(true);
-
   // general
-
   useEffect(() => {
     console.log("1st");
     setRepType(localStorage.getItem("reportType"));
-
     async function loadLists() {
       await loadWarehouses();
       await loadMaterial();
       await loadSubType();
+      await loadEntityStatus();
     }
     loadLists();
   }, []);
-
   useEffect(() => {
     console.log("2nd");
     async function setDefaultDate() {
@@ -67,7 +66,6 @@ const ReportFilter = () => {
     }
     setDefaultDate();
   }, []);
-
   useEffect(() => {
     showTitle();
   }, [repType]);
@@ -78,6 +76,10 @@ const ReportFilter = () => {
     } else if (repType === "HHR") {
       setRepTitle("Handheld Report");
       setIsHandheldReport(true);
+    } else if (repType === "CSR") {
+      setRepTitle("Stock Report");
+      console.log("yes this is stock");
+      setIsStockReport(true);
     } else {
       setRepTitle("Unknown Report");
     }
@@ -103,53 +105,6 @@ const ReportFilter = () => {
   function updateFromDate(e) {
     setFromDate(e.target.value + "T00:00:00.000Z");
   }
-
-  const salesReport = async () => {
-    let qs = "";
-    if (selectedMaterials.length > 0) {
-      qs = qs + "&material=" + selectedMaterials;
-    }
-    if (fromDate) {
-      qs = qs + "&fromDt=" + fromDate.trim();
-    }
-    if (toDate) {
-      qs = qs + "&toDt=" + toDate.trim();
-    }
-    if (selectedSubTypes.length > 0) {
-      qs = qs + "&subtype=" + selectedSubTypes;
-    }
-    if (selectedWarehouses.length > 0) {
-      qs = qs + "&warehouse=" + selectedWarehouses;
-    }
-    const url = contextType.dbUrl + "sales/sale-report?" + qs.substr(1);
-    console.log("url:" + url);
-    var Fdate = Moment.utc(fromDate).format("DD-MM-YYYY");
-    var Tdate = Moment.utc(toDate).format("DD-MM-YYYY");
-    // console.log("MYmoment:"+date);
-    const getAllSales = async () => {
-      try {
-        console.log("getAllSales");
-        // const response = await axios.get("http://localhost:5000/api/sales");
-        const response = await axios.get(url);
-        // console.log("resp: "+response.data.sales);
-        console.log("resp1: " + response.data);
-
-        setSales(response.data);
-        generateSalesReportPDF(response.data, Fdate, Tdate);
-      } catch (err) {
-        console.log("error", +err);
-      }
-    };
-    getAllSales();
-    function myDate() {
-      console.log("mydate:" + myFromDate);
-    }
-    myDate();
-    window.GLOBAL_DATA = { value: 1 };
-
-    // console.log( window.GLOBAL_DATA[value]);
-  };
-
   const salesReportNew = async () => {
     let qs = "";
     if (selectedMaterials.length > 0) {
@@ -171,7 +126,7 @@ const ReportFilter = () => {
     console.log("newurl:" + url);
     var Fdate = Moment.utc(fromDate).format("DD-MM-YYYY");
     var Tdate = Moment.utc(toDate).format("DD-MM-YYYY");
-    // console.log("MYmoment:"+date) z  
+    // console.log("MYmoment:"+date) z
     console.log("getAllSales");
     // const response = await axios.get("http://localhost:5000/api/sales");
     const response = await axios.get(url);
@@ -191,16 +146,15 @@ const ReportFilter = () => {
     // contextType.rptData =response.data;
     history.push({
       pathname: "/ReportViewer",
-      state:{
-        rptData:response.data,
-        rptHeading:"Sales Report",
-        fromDt:Fdate,
-        toDt:Tdate,
-        warehouse:selectedWarehousesNames,
-        material:selectedMaterialsName,
-        subtype:selectedSubTypesName,
-    
-      }
+      state: {
+        rptData: response.data,
+        rptHeading: "Sales Report",
+        fromDt: Fdate,
+        toDt: Tdate,
+        warehouse: selectedWarehousesNames,
+        material: selectedMaterialsName,
+        subtype: selectedSubTypesName,
+      },
     });
     // contextType.rptdata =response.data;
     // open Page2 => data= qs, heading="Sales Report"
@@ -213,6 +167,8 @@ const ReportFilter = () => {
       salesReportNew();
     } else if (isHandheldReport) {
       hhReport();
+    } else if (isStockReport) {
+      stockReport();
     }
   };
 
@@ -239,7 +195,7 @@ const ReportFilter = () => {
     const response = await axios.get(url);
     // console.log("resp: "+response.data.sales);
     console.log("resp1: " + response.data);
-    if(!response.data){
+    if (!response.data) {
       console.log("No Data received");
     }
 
@@ -247,10 +203,10 @@ const ReportFilter = () => {
     // generateHandheldReportPDF(response.data, Fdate, Tdate);
 
     // contextType.rptheading="Handheld Report";
-    const params={
-      "fromDate":fromDate.trim(),
-      "toDate":toDate.trim()
-    }
+    const params = {
+      fromDate: fromDate.trim(),
+      toDate: toDate.trim(),
+    };
     localStorage.setItem("rptHeading", "Handheld Report");
 
     localStorage.setItem("rptData", JSON.stringify(response.data));
@@ -260,17 +216,76 @@ const ReportFilter = () => {
 
     history.push({
       pathname: "/ReportViewer",
-      state:{
-        rptData:response.data,
-        rptHeading:"Handheld Report",
-        fromDt:Fdate,
-        toDt:Tdate,
-        warehouse:selectedWarehousesNames,
-      }
+      state: {
+        rptData: response.data,
+        rptHeading: "Handheld Report",
+        fromDt: Fdate,
+        toDt: Tdate,
+        warehouse: selectedWarehousesNames,
+      },
     });
     // console.log( window.GLOBAL_DATA[value]);
   };
 
+  const stockReport = async () => {
+    let qs = "";
+    if (selectedMaterials.length > 0) {
+      qs = qs + "&material=" + selectedMaterials;
+    }
+    if (fromDate) {
+      qs = qs + "&fromDt=" + fromDate.trim();
+    }
+    if (toDate) {
+      qs = qs + "&toDt=" + toDate.trim();
+    }
+    if (selectedSubTypes.length > 0) {
+      qs = qs + "&subtype=" + selectedSubTypes;
+    }
+    if (selectedWarehouses.length > 0) {
+      qs = qs + "&warehouse=" + selectedWarehouses;
+    }
+    if (selectedEntityStatuses.length > 0) {
+      qs = qs + "&status=" + selectedEntityStatuses;
+    }
+
+    const url = contextType.dbUrl + "reports/stocktest?" + qs.substr(1);
+    console.log("newurl:" + url);
+    var Fdate = Moment.utc(fromDate).format("DD-MM-YYYY");
+    var Tdate = Moment.utc(toDate).format("DD-MM-YYYY");
+    // console.log("MYmoment:"+date) z
+    console.log("getAllstocks");
+    // const response = await axios.get("http://localhost:5000/api/sales");
+    const response = await axios.get(url);
+    // console.log("resp: "+response.data.sales);
+    console.log("resp1: " + response.data);
+
+    // setSales(response.data);
+    console.log("mydata:", contextType.rptdata);
+    // generateSalesReportPDF(response.data, Fdate, Tdate);
+
+    // conbtext type
+    // rptHeading
+    // rptData
+    // contextType.rptHeading="Sales Report";
+    // localStorage.setItem("rptHeading", "Sales Report ");
+    // localStorage.setItem("rptData", JSON.stringify(response.data));
+    // contextType.rptData =response.data;
+    history.push({
+      pathname: "/ReportViewer",
+      state: {
+        rptData: response.data,
+        rptHeading: "Stock Report",
+        fromDt: Fdate,
+        toDt: Tdate,
+        warehouse: selectedWarehousesNames,
+        material: selectedMaterialsName,
+        subtype: selectedSubTypesName,
+        status: selectedStatusName,
+      },
+    });
+    // contextType.rptdata =response.data;
+    // open Page2 => data= qs, heading="Sales Report"
+  };
   //////////////////////////////////////////////// Warehouses/////////////////////////////////////////////////////////////
   const [warehouseOptions, setWarehouseOptions] = useState([]);
   const [selectedWarehouseOptions, setSelectedWarehouseOptions] = useState([]);
@@ -298,10 +313,10 @@ const ReportFilter = () => {
         console.log(myName);
       });
       setSelectedWarehouse(myCode.substr(1));
-      setSelectedWarehouseNames(myName.substr(1))
+      setSelectedWarehouseNames(myName.substr(1));
     } else {
-      setSelectedWarehouse("");      
-      setSelectedWarehouseNames("")
+      setSelectedWarehouse("");
+      setSelectedWarehouseNames("");
     }
   }, [selectedWarehouseOptions]);
 
@@ -336,7 +351,7 @@ const ReportFilter = () => {
       setSelectedMaterialsName(myName.substr(1));
     } else {
       setSelectedMaterial("");
-      setSelectedMaterialsName("")
+      setSelectedMaterialsName("");
     }
   }, [selectedMaterialOptions]);
   function handleMaterialChange(event) {
@@ -375,12 +390,50 @@ const ReportFilter = () => {
   function handleSubTypeChange(event) {
     setSelectedSubTypeOptions(event);
   }
+  //////////////////////////////status//////////////////////////////////////////
+  const [entityStatusOptions, setEntityStatusOptions] = useState([]);
+  const [ selectedEntityStatusOptions, setSelectedEntityStatusOptions] = useState([]);
+  const [selectedEntityStatuses, setSelectedEntityStatus] = useState("");
+  const [selectedStatusName, setSelectedStatusName] = useState("");
+
+  const loadEntityStatus = async () => {
+    const result = await axios.get(contextType.dbUrl + "entitystatus");
+
+    var map = new HashMap();
+    let entitystatusFromAPI = result.data.map((sta) => {
+      map.set(sta.sta_code, sta.sta_desc);
+      return { value: sta.sta_code, label: sta.sta_desc, id: sta._id };
+    });
+    // setEntityStatusMap(map);
+    setEntityStatusOptions(
+      [{ id: "0", value: "", label: "" }].concat(entitystatusFromAPI)
+    );
+  };
+  useEffect(() => {
+    let myCode = "";
+    let myName = "";
+    if (selectedEntityStatusOptions != null) {
+      let codes = selectedEntityStatusOptions.map((sta) => {
+        myCode = myCode + "|" + sta.value;
+        myName = myName + "," + sta.label;
+        //console.log(myCode);
+      });
+      setSelectedEntityStatus(myCode.substr(1));
+      setSelectedStatusName(myName.substr(1));
+    } else {
+      setSelectedEntityStatus("");
+      setSelectedStatusName("");
+    }
+  }, [selectedEntityStatusOptions]);
+
+  function handleEntityStatusChange(event) {
+    setSelectedEntityStatusOptions(event);
+  }
+
   ///////////////////////////////////////////entitytype//////////////////////////////////
   // render page
   return (
-    
     <div>
-         
       <React.Fragment>
         <div
           className="container header detail scroll"
@@ -394,7 +447,6 @@ const ReportFilter = () => {
         >
           <center>
             <h4 style={{ paddingTop: "5px", fontSize: "20px" }}>{repTitle}</h4>
-         
           </center>
         </div>
         <div
@@ -403,28 +455,71 @@ const ReportFilter = () => {
         >
           <br></br>
           <div style={{ marginBottom: "120px" }}>
-            <div>
-              
-                <div>
-                  <div style={{ display: "flex", marginBottom: "10px" }}>
-                    <label className="label100 report-label">Warehouse:</label>
-                    <Select
-                      className="width300"
-                      value={selectedWarehouseOptions}
-                      // isDisabled={isHandheldReport ? true : false}
-                      onChange={handleWarehouseChange}
-                      options={warehouseOptions}
-                      placeholder="None Selected"
-                      isMulti
-                      // components={{
-                      //   ValueContainer,
-                      // }}
-                      hideSelectedOptions={false}
-                    />
-                  </div>
+          <div>
+              {!isHandheldReport && !isStockReport&& (<div style={{ display: "flex", marginBottom: "10px" }}>
+                  <label className="label100 mlabel">Warehouse:</label>
+                  <Select
+                    className="width300"
+                    value={selectedWarehouseOptions}
+                    // isDisabled={isHandheldReport ? true : false}
+                    onChange={handleWarehouseChange}
+                    options={warehouseOptions}
+                    placeholder="None Selected"
+                    isMulti
+                    // components={{
+                    //   ValueContainer,
+                    // }}
+                    hideSelectedOptions={false}
+                  />
                 </div>
-              {/* <input type="date" id="theDate"></input> */}
-              {isSalesReport && ( <div className="rows">
+              )}
+              </div>
+          
+               {!isHandheldReport && !isSalesReport && (
+              <div className="rows">
+                <div style={{ display: "flex", marginBottom: "10px" }}>
+                  <label className="label100 mlabel">Warehouse:</label>
+                  <Select
+                    className="width300"
+                    value={selectedWarehouseOptions}
+                    // isDisabled={isHandheldReport ? true : false}
+                    onChange={handleWarehouseChange}
+                    options={warehouseOptions}
+                    placeholder="None Selected"
+                    isMulti
+                    // components={{
+                    //   ValueContainer,
+                    // }}
+                    hideSelectedOptions={false}
+                  />
+                </div>
+              </div>
+             )}
+             {!isHandheldReport && !isSalesReport &&(
+              <div style={{ display: "flex", marginBottom: "10px" }}>
+              <label
+                className=" report-label"
+                // style={{ width: "120px", marginLeft: "50px" }}
+              >
+                Status:
+              </label>
+              <Select
+                    className="width300"
+                    value={selectedEntityStatusOptions}
+                    onChange={handleEntityStatusChange}
+                    options={entityStatusOptions}
+                    // isDisabled={isHandheldReport ? true : false}
+                    placeholder="None Selected"
+                    isMulti
+                    // components={{
+                    //   ValueContainer,
+                    // }}
+                    hideSelectedOptions={false}
+                  />
+            </div>
+             )}
+             {!isHandheldReport && (
+              <div className="rows">
                 <div style={{ display: "flex", marginBottom: "10px" }}>
                   <label className="label100 mlabel">Material:</label>
                   <Select
@@ -441,9 +536,10 @@ const ReportFilter = () => {
                     hideSelectedOptions={false}
                   />
                 </div>
-              </div>)}
-            </div>
-            {isSalesReport && (  <div style={{ display: "flex", marginBottom: "10px" }}>
+              </div>
+             )}
+             {!isHandheldReport && (
+              <div style={{ display: "flex", marginBottom: "10px" }}>
               <label
                 className=" report-label"
                 // style={{ width: "120px", marginLeft: "50px" }}
@@ -451,7 +547,7 @@ const ReportFilter = () => {
                 Subtype:
               </label>
               <Select
-                className="width300  "
+                className="width300"
                 value={selectedSubTypeOptions}
                 onChange={handleSubTypeChange}
                 options={subtypeOptions}
@@ -463,7 +559,9 @@ const ReportFilter = () => {
                 // }}
                 hideSelectedOptions={false}
               />
-            </div>)}
+            </div>
+             )}
+              {!isStockReport && (
             <div style={{}}>
               <div className="rows">
                 <div style={{ display: "flex", marginBottom: "10px" }}>
@@ -481,6 +579,8 @@ const ReportFilter = () => {
                 </div>
               </div>
             </div>
+              )}
+               {!isStockReport && (
             <div className="rows">
               <div style={{ display: "flex", marginBottom: "10px" }}>
                 <label
@@ -501,6 +601,7 @@ const ReportFilter = () => {
                 />
               </div>
             </div>
+               )}
             {/* <div style={{marginLeft:'190px'}}>
                 <button
             type="submit"
@@ -516,14 +617,14 @@ const ReportFilter = () => {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  style={{ width: "110px", height: "35px"}}
+                  style={{ width: "110px", height: "35px" }}
                   onClick={RunClicked}
                 >
                   Run Report
                 </button>
               </div>
             </center>
-          </div>         
+          </div>
         </div>
       </React.Fragment>
     </div>
