@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const config = require('config')
 const cors = require('cors');
 const app = express()
+const fileUpload = require('express-fileupload');
+app.use(fileUpload());
+
 // const path = require('path')
 // Passing middleware
 app.use(express.json())
@@ -55,6 +58,25 @@ app.use('/api/test', require('./routes/api/test'))
 app.use('/api/search', require('./routes/api/search'))
 app.use('/api/reports', require('./routes/api/Reports'))
 app.use(express.static("trackr-client/build"));
+app.post('/upload', function(req, res) {
+    let sampleFile;
+    let uploadPath;
+    if (!req.files || Object.keys(req.files).length === 0) {
+      res.status(400).send('No files were uploaded.');
+      return;
+    }
+    console.log('req.files >>>', req.files); // eslint-disable-line
+    sampleFile = req.files.sampleFile;
+  
+    uploadPath = __dirname + '/trackr-client/public/images/' + sampleFile.name;
+  
+    sampleFile.mv(uploadPath, function(err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.send('File uploaded to ' + uploadPath);
+    });
+  });
 // server static assests if in production
 if(process.env.NODE_ENV === 'production')
 {
