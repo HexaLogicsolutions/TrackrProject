@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const config = require('config')
 const cors = require('cors');
 const app = express()
+const logger = require('heroku-logger');
+
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
 
@@ -58,6 +60,7 @@ app.use('/api/test', require('./routes/api/test'))
 app.use('/api/search', require('./routes/api/search'))
 app.use('/api/reports', require('./routes/api/Reports'))
 app.use(express.static("trackr-client/build"));
+
 app.post('/upload', function(req, res) {
     let sampleFile;
     let uploadPath;
@@ -89,5 +92,7 @@ if(process.env.NODE_ENV === 'production')
 
 
 app.listen(Port, () => {
-    console.log(`Server is running at Port + ${Port}` )
+
+    console.log(`Server is running at Port + ${Port}` );
+    logger.info('Starting server', { port: 4000 });
 })
