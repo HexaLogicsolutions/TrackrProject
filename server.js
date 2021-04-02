@@ -3,8 +3,18 @@ const mongoose = require('mongoose');
 const config = require('config')
 const cors = require('cors');
 const app = express()
-const logger = require('heroku-logger');
-
+/////////////////////////////////////////////////////////////////////
+const log4js = require('log4js');
+const logger = log4js.getLogger();
+// logger.level = 'info';
+log4js.configure({
+  appenders:{fileAppender:{type:'file', filename: __dirname + '/trackr-client/public/Logs/my.log'}},
+  categories:{default:{appenders:['fileAppender'],level:'info'}}
+});
+logger.error('Trackr-server error');
+logger.info('Trackr-server info');
+logger.warn('Trackr-server warn');
+/////////////////////////////////////////////////////////////////////////////////
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
 
@@ -13,8 +23,8 @@ app.use(fileUpload());
 app.use(express.json())
 app.use(cors());
 const Port = process.env.PORT || 5000;
-
 const db = config.get('mongoURI')
+//create the logger
 
 
 mongoose
@@ -94,5 +104,5 @@ if(process.env.NODE_ENV === 'production')
 app.listen(Port, () => {
 
     console.log(`Server is running at Port + ${Port}` );
-    logger.info('Starting server', { port: 4000 });
+   
 })

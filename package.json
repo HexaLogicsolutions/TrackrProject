@@ -17,6 +17,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
+    "better-logging": "^4.5.0",
     "config": "^3.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -26,11 +27,15 @@
     "html-pdf": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "jsreport": "^2.11.0",
+    "log4js": "^6.3.0",
+    "logging": "^3.3.0",
     "mongoose": "^5.9.5",
     "nodemon": "^2.0.6",
+    "npmlog": "^4.1.2",
     "path": "^0.12.7",
     "react-icons": "^3.11.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "winston": "^3.3.3"
   },
   "keywords": [],
   "devDependencies": {
