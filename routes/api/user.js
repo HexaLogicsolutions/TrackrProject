@@ -139,7 +139,7 @@ router.delete('/:code', (req, res) => {
     if (users.length == 0) res.send(`${req.params.code} user not found`);
     else {
       const user= users[0];
-      console.log(user);
+     
       user.delete()
       .then((usr)=>{
         console.log("user deleted");

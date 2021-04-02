@@ -1,0 +1,8 @@
+[2021-04-02T18:56:00.837] [ERROR] default - Trackr-server error
+[2021-04-02T18:56:00.840] [INFO] default - Trackr-server info
+[2021-04-02T18:56:00.840] [WARN] default - Trackr-server warning new
+[2021-04-02T18:56:01.135] [INFO] default - Serverxx is running at Port + 5000
+[2021-04-02T18:56:01.137] [ERROR] default - Trackr-server errorxxxx
+[2021-04-02T18:56:01.137] [INFO] default - Trackr-server infoxxxx
+[2021-04-02T18:56:58.240] [ERROR] default - Code:HHT
+[2021-04-02T18:56:58.240] [ERROR] default - Password:ssss

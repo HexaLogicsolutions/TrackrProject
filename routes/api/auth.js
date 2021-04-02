@@ -4,11 +4,23 @@ const config = require("config");
 const express = require("express");
 const router = express.Router();
 
+const log4js = require('log4js');
+const logger = log4js.getLogger();
+// logger.level = 'info';
+// log4js.configure({
+//   appenders:{fileAppender:{type:'file', filename: __dirname + '/trackr-client/public/Logs/my.log2'}},
+//   categories:{default:{appenders:['fileAppender'],level:'info'}}
+// });
+
 router.post("/", (req, res) => {
   console.log("in post");
   const { code, password, token} = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
+  logger.error("Code:"+code);
+  logger.error("Password:"+password);
+  console.log("Codexx:"+code);
+  console.log("Passwordxx:"+password);
 
   if (token) {
     try {
@@ -18,6 +30,7 @@ router.post("/", (req, res) => {
       User.findById(req.user.id)
         .then((user) => {
           console.log("token check");
+          console.log(code);
           jwt.sign(
             { id: user.id },
             config.get("jwtSecret"),
