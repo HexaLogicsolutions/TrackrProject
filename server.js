@@ -4,16 +4,16 @@ const config = require('config')
 const cors = require('cors');
 const app = express()
 /////////////////////////////////////////////////////////////////////
-const log4js = require('log4js');
-const logger = log4js.getLogger();
+// const log4js = require('log4js');
+// const logger = log4js.getLogger();
 // logger.level = 'info';
-log4js.configure({
-  appenders:{fileAppender:{type:'file', filename: __dirname + '/Logs/log.txt'}},
-  categories:{default:{appenders:['fileAppender'],level:'info'}}
-});
-logger.error('Trackr-server error');
-logger.info('Trackr-server info');
-logger.warn('Trackr-server warning new');
+// log4js.configure({
+//   appenders:{fileAppender:{type:'file', filename: __dirname + '/Logs/log.txt'}},
+//   categories:{default:{appenders:['fileAppender'],level:'info'}}
+// });
+// logger.error('Trackr-server error');
+// logger.info('Trackr-server info');
+// logger.warn('Trackr-server warning new');
 /////////////////////////////////////////////////////////////////////////////////
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
@@ -102,9 +102,9 @@ if(process.env.NODE_ENV === 'production')
 
 
 app.listen(Port, () => {
-    logger.info(`Serverxx is running at Port + ${Port}` );
-    console.log(`Server is running at Port + ${Port}` );
-    logger.error('Trackr-server errorxxxx');
-    logger.info('Trackr-server infoxxxx');
+    // logger.info(`Serverxx is running at Port + ${Port}` );
+    // console.log(`Server is running at Port + ${Port}` );
+    // logger.error('Trackr-server errorxxxx');
+    // logger.info('Trackr-server infoxxxx');
    
 })

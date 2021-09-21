@@ -4,8 +4,8 @@ const config = require("config");
 const express = require("express");
 const router = express.Router();
 
-const log4js = require('log4js');
-const logger = log4js.getLogger();
+// const log4js = require('log4js');
+// const logger = log4js.getLogger();
 // logger.level = 'info';
 // log4js.configure({
 //   appenders:{fileAppender:{type:'file', filename: __dirname + '/trackr-client/public/Logs/my.log2'}},
@@ -17,8 +17,8 @@ router.post("/", (req, res) => {
   const { code, password, token} = req.body;
   // console.log(req.body);
 
-  logger.error("Code:"+code);
-  logger.error("Password:"+password);
+  // logger.error("Code:"+code);
+  // logger.error("Password:"+password);
   console.log("Codexx:"+code);
   console.log("Passwordxx:"+password);
 
