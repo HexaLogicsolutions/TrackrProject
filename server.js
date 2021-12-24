@@ -103,7 +103,7 @@ if(process.env.NODE_ENV === 'production')
 
 app.listen(Port, () => {
     // logger.info(`Serverxx is running at Port + ${Port}` );
-    // console.log(`Server is running at Port + ${Port}` );
+     console.log(`Server is running at Port + ${Port}` );
     // logger.error('Trackr-server errorxxxx');
     // logger.info('Trackr-server infoxxxx');
    
