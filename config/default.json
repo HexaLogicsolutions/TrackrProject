@@ -1,6 +1,6 @@
 {   
     
-    "mongoURI" : "mongodb+srv://root:root@cluster0.aaabz.mongodb.net/hexal",
+    "mongoURI" : "mongodb+srv://root:root@cluster0.aaabz.mongodb.net/trackrDB",
 
     "mongoURIx" : "mongodb://localhost/hexal",
     "jwtSecret" : "jwtSecret"
