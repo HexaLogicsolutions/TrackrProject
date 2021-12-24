@@ -18,7 +18,7 @@ const app = express()
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
 
-// const path = require('path')
+ const path = require('path')
 // Passing middleware
 app.use(express.json())
 app.use(cors());
