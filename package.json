@@ -12,7 +12,7 @@
     "server": "nodemon server.js",
     "heroku-postbuild": " NPM_CONFIG_PRODUCTION=false npm install --prefix trackr-client && npm run build --prefix trackr-client"
   },
-  "author": "Ritul",
+  "author": "Gaurang",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",

@@ -11,6 +11,7 @@ import { AddDepModal } from "../components/AddDepModal";
 import HashMap from "hashmap";
 
 const UserList = () => {
+  console.log("User list");
   let history = useHistory();
   const contextType = useContext(AuthContext);
 
@@ -28,6 +29,7 @@ const UserList = () => {
 
   const loadUsers = async () => {
     const result = await axios.get(contextType.dbUrl + "users");
+    console.log("User DAta:"+result.data);
     setUser(result.data);
   };
 
@@ -184,12 +186,19 @@ const UserList = () => {
               </tr>
             </thead>
             <tbody>
+           
+           
               {users.map((user, index) => (
+               
                 <tr key={index} style={{ height: "30px", valign: "middle" }}>
                   <th scope="row" style={{ verticalAlign: "middle" }}>
                     {index + 1}
                   </th>
+              
                   {/* <td>{user.usr_company}</td> */}
+                 
+
+
                   <td style={{ verticalAlign: "middle" }}>{user.usr_code}</td>
                   <td style={{ verticalAlign: "middle" }}>{user.usr_name}</td>
                   <td style={{ verticalAlign: "middle" }}> {user.usr_email}</td>
@@ -200,7 +209,7 @@ const UserList = () => {
                   <td style={{ verticalAlign: "middle" }}>
                     <input
                       type="checkbox"
-                      checked={user.usr_active ? true : false}
+                      checked={user.usr_active ? true : false} 
                       readOnly
                     ></input>
                   </td>
