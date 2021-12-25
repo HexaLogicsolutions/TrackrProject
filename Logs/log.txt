@@ -6,3 +6,81 @@
 [2021-04-02T18:56:01.137] [INFO] default - Trackr-server infoxxxx
 [2021-04-02T18:56:58.240] [ERROR] default - Code:HHT
 [2021-04-02T18:56:58.240] [ERROR] default - Password:ssss
+[2021-12-24T15:08:40.326] [ERROR] default - Trackr-server error
+[2021-12-24T15:08:40.328] [INFO] default - Trackr-server info
+[2021-12-24T15:08:40.328] [WARN] default - Trackr-server warning new
+[2021-12-24T15:08:42.056] [INFO] default - Serverxx is running at Port + 5000
+[2021-12-24T15:08:42.058] [ERROR] default - Trackr-server errorxxxx
+[2021-12-24T15:08:42.058] [INFO] default - Trackr-server infoxxxx
+[2021-12-24T15:11:25.378] [ERROR] default - Code:undefined
+[2021-12-24T15:11:25.379] [ERROR] default - Password:null
+[2021-12-24T15:11:26.291] [ERROR] default - Code:undefined
+[2021-12-24T15:11:26.291] [ERROR] default - Password:null
+[2021-12-24T15:11:40.580] [ERROR] default - Code:undefined
+[2021-12-24T15:11:40.580] [ERROR] default - Password:null
+[2021-12-24T15:11:40.915] [ERROR] default - Code:undefined
+[2021-12-24T15:11:40.915] [ERROR] default - Password:null
+[2021-12-24T15:12:33.677] [ERROR] default - Code:undefined
+[2021-12-24T15:12:33.677] [ERROR] default - Password:null
+[2021-12-24T15:12:34.064] [ERROR] default - Code:undefined
+[2021-12-24T15:12:34.064] [ERROR] default - Password:null
+[2021-12-24T15:12:38.974] [ERROR] default - Code:undefined
+[2021-12-24T15:12:38.975] [ERROR] default - Password:null
+[2021-12-24T15:12:39.261] [ERROR] default - Code:undefined
+[2021-12-24T15:12:39.262] [ERROR] default - Password:null
+[2021-12-24T15:13:28.023] [ERROR] default - Code:undefined
+[2021-12-24T15:13:28.023] [ERROR] default - Password:null
+[2021-12-24T15:13:28.395] [ERROR] default - Code:undefined
+[2021-12-24T15:13:28.395] [ERROR] default - Password:null
+[2021-12-24T15:13:31.126] [ERROR] default - Code:undefined
+[2021-12-24T15:13:31.126] [ERROR] default - Password:null
+[2021-12-24T15:13:31.390] [ERROR] default - Code:undefined
+[2021-12-24T15:13:31.390] [ERROR] default - Password:null
+[2021-12-24T15:14:11.903] [ERROR] default - Code:undefined
+[2021-12-24T15:14:11.903] [ERROR] default - Password:null
+[2021-12-24T15:14:13.199] [ERROR] default - Code:undefined
+[2021-12-24T15:14:13.200] [ERROR] default - Password:null
+[2021-12-24T15:15:47.529] [ERROR] default - Code:undefined
+[2021-12-24T15:15:47.530] [ERROR] default - Password:null
+[2021-12-24T15:15:47.951] [ERROR] default - Code:undefined
+[2021-12-24T15:15:47.951] [ERROR] default - Password:null
+[2021-12-25T12:09:42.436] [ERROR] default - Trackr-server error
+[2021-12-25T12:09:42.438] [INFO] default - Trackr-server info
+[2021-12-25T12:09:42.438] [WARN] default - Trackr-server warning new
+[2021-12-25T12:09:43.919] [INFO] default - Serverxx is running at Port + 5000
+[2021-12-25T12:09:43.920] [ERROR] default - Trackr-server errorxxxx
+[2021-12-25T12:09:43.920] [INFO] default - Trackr-server infoxxxx
+[2021-12-25T12:12:20.206] [ERROR] default - Code:undefined
+[2021-12-25T12:12:20.207] [ERROR] default - Password:null
+[2021-12-25T12:12:31.568] [ERROR] default - Code:GM03
+[2021-12-25T12:12:31.568] [ERROR] default - Password:1234
+[2021-12-25T12:12:46.858] [ERROR] default - Code:GM03
+[2021-12-25T12:12:46.859] [ERROR] default - Password:1234
+[2021-12-25T12:12:52.996] [ERROR] default - Code:GM02
+[2021-12-25T12:12:52.996] [ERROR] default - Password:1234
+[2021-12-25T12:12:54.461] [ERROR] default - Code:undefined
+[2021-12-25T12:12:54.461] [ERROR] default - Password:null
+[2021-12-25T12:13:00.171] [ERROR] default - Code:undefined
+[2021-12-25T12:13:00.171] [ERROR] default - Password:null
+[2021-12-25T12:13:00.610] [ERROR] default - Code:undefined
+[2021-12-25T12:13:00.610] [ERROR] default - Password:null
+[2021-12-25T12:13:14.827] [ERROR] default - Code:undefined
+[2021-12-25T12:13:14.827] [ERROR] default - Password:null
+[2021-12-25T12:13:15.218] [ERROR] default - Code:undefined
+[2021-12-25T12:13:15.218] [ERROR] default - Password:null
+[2021-12-25T12:14:13.068] [ERROR] default - Code:undefined
+[2021-12-25T12:14:13.068] [ERROR] default - Password:null
+[2021-12-25T12:14:13.547] [ERROR] default - Code:undefined
+[2021-12-25T12:14:13.547] [ERROR] default - Password:null
+[2021-12-25T12:14:51.597] [ERROR] default - Code:undefined
+[2021-12-25T12:14:51.597] [ERROR] default - Password:null
+[2021-12-25T12:14:51.955] [ERROR] default - Code:undefined
+[2021-12-25T12:14:51.955] [ERROR] default - Password:null
+[2021-12-25T12:15:02.683] [ERROR] default - Code:undefined
+[2021-12-25T12:15:02.683] [ERROR] default - Password:null
+[2021-12-25T12:15:02.953] [ERROR] default - Code:undefined
+[2021-12-25T12:15:02.953] [ERROR] default - Password:null
+[2021-12-25T12:16:30.715] [ERROR] default - Code:undefined
+[2021-12-25T12:16:30.715] [ERROR] default - Password:null
+[2021-12-25T12:16:33.252] [ERROR] default - Code:undefined
+[2021-12-25T12:16:33.252] [ERROR] default - Password:null
