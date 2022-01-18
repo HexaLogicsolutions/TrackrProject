@@ -171,7 +171,7 @@ const Search = () => {
     if (editActionGroup) {
       console.log("editable");
       // this.myRefs[1].focus();
-      setTitle("Edit Action Group");
+      // setTitle("Edit Action Group");
       setButtonText("Update");
 
       const actionGroupCode = contextType.currentObject;
@@ -182,7 +182,7 @@ const Search = () => {
           return response.json();
         })
         .then(async (data) => {
-          setCode(data.act_code);
+          //setCode(data.act_code);
 
           setName(data.act_name);
           setEnabled(data.act_enabled);
@@ -226,38 +226,36 @@ const Search = () => {
   }
 
   function pdf() {
-//     console.log("hello pdf");
-//    var pdf = new jsPDF('l','pt','a3');
-//    pdf.html(document.getElementById('invoice'),{
-//     //  html2canvas:
-//     //     { scale: 0.6},
-       
-     
-// //      startY: 60,
+    //     console.log("hello pdf");
+    //    var pdf = new jsPDF('l','pt','a3');
+    //    pdf.html(document.getElementById('invoice'),{
+    //     //  html2canvas:
+    //     //     { scale: 0.6},
 
-//      callback:function(){
-//        pdf.save('mydocument.pdf');
-//       window.open(pdf.output('bloburl'));     }
-//    })
-var pdfsize = 'a0';
-var pdf = new jsPDF('l', 'pt', pdfsize);
+    // //      startY: 60,
 
-pdf.autoTable({
-  html: 'table',
-  startY: 60,
-  styles: {
-    fontSize: 30,
-    cellWidth: 'wrap'
-  },
-  columnStyles: {
-    1: {columnWidth: 'auto'}
+    //      callback:function(){
+    //        pdf.save('mydocument.pdf');
+    //       window.open(pdf.output('bloburl'));     }
+    //    })
+    var pdfsize = "a0";
+    var pdf = new jsPDF("l", "pt", pdfsize);
+
+    pdf.autoTable({
+      html: "table",
+      startY: 60,
+      styles: {
+        fontSize: 30,
+        cellWidth: "wrap",
+      },
+      columnStyles: {
+        1: { columnWidth: "auto" },
+      },
+    });
+
+    // pdf.save(pdfsize + ".pdf");
+    window.open(pdf.output("bloburl"));
   }
-});
-
-// pdf.save(pdfsize + ".pdf");
-window.open(pdf.output('bloburl')); 
-};
-  
 
   function updateToDate(e) {
     setToDate(e.target.value + "T23:59:59.000Z");
@@ -363,10 +361,8 @@ window.open(pdf.output('bloburl'));
 
   // entity subtypes
   const [entitySubTypeOptions, setEntitySubTypeOptions] = useState([]);
-  const [
-    selectedEntitySubTypeOptions,
-    setSelectedEntitySubTypeOptions,
-  ] = useState([]);
+  const [selectedEntitySubTypeOptions, setSelectedEntitySubTypeOptions] =
+    useState([]);
   const [selectedEntitySubTypes, setSelectedEntitySubTypes] = useState("");
 
   const loadEntitySubTypes = async () => {
@@ -544,10 +540,8 @@ window.open(pdf.output('bloburl'));
 
   //location Area
   const [locationAreaOptions, setLocationAreaOptions] = useState([]);
-  const [
-    selectedLocationAreaOptions,
-    setSelectedLocationAreaOptions,
-  ] = useState([]);
+  const [selectedLocationAreaOptions, setSelectedLocationAreaOptions] =
+    useState([]);
   const [selectedLocationAreas, setSelectedLocationAreas] = useState("");
 
   const loadLocationAreas = async () => {
@@ -663,10 +657,8 @@ window.open(pdf.output('bloburl'));
 
   //entity status
   const [entityStatusOptions, setEntityStatusOptions] = useState([]);
-  const [
-    selectedEntityStatusOptions,
-    setSelectedEntityStatusOptions,
-  ] = useState([]);
+  const [selectedEntityStatusOptions, setSelectedEntityStatusOptions] =
+    useState([]);
   const [selectedEntityStatuses, setSelectedEntityStatus] = useState("");
 
   const loadEntityStatus = async () => {
@@ -887,7 +879,7 @@ window.open(pdf.output('bloburl'));
 
                     <Select
                       className="selectnew"
-                      value={selectedMaterialOptions}
+                      //value={selectedMaterialOptions}
                       onChange={handleMaterialChange}
                       options={materialOptions}
                       placeholder="None Selected"
@@ -907,7 +899,7 @@ window.open(pdf.output('bloburl'));
 
                   <Select
                     className="selectnew"
-                    value={selectedEntityStatusOptions}
+                   // value={selectedEntityStatusOptions}
                     onChange={handleEntityStatusChange}
                     options={entityStatusOptions}
                     placeholder="None Selected"
@@ -929,7 +921,7 @@ window.open(pdf.output('bloburl'));
                     <input
                       type="text"
                       name="code"
-                      value={code}
+                     // value={code}
                       className="textsmallnew"
                       onChange={onChange}
                       required
@@ -947,7 +939,7 @@ window.open(pdf.output('bloburl'));
 
                     <Select
                       className="selectnew"
-                      value={selectedLocationAreaOptions}
+                      //value={selectedLocationAreaOptions}
                       onChange={handleLocationAreaChange}
                       options={locationAreaOptions}
                       placeholder="None Selected"
@@ -967,7 +959,7 @@ window.open(pdf.output('bloburl'));
 
                   <Select
                     className="selectnew"
-                    value={selectedLocationOptions}
+                    //value={selectedLocationOptions}
                     onChange={handleLocationChange}
                     options={locationOptions}
                     placeholder="None Selected"
@@ -989,7 +981,7 @@ window.open(pdf.output('bloburl'));
                     <input
                       type="text"
                       name="extcode"
-                      value={custCode}
+                      //value={custCode}
                       className=" textsmallnew"
                       onChange={onChange1}
                       required
@@ -1006,7 +998,7 @@ window.open(pdf.output('bloburl'));
 
                   <Select
                     className="selectnew"
-                    value={selectedEntityTypeOptions}
+                   // value={selectedEntityTypeOptions}
                     onChange={handleEntityTypeChange}
                     options={entityTypeOptions}
                     placeholder="None Selected"
@@ -1025,7 +1017,7 @@ window.open(pdf.output('bloburl'));
 
                   <Select
                     className="selectnew"
-                    value={selectedEntitySubTypeOptions}
+                    //value={selectedEntitySubTypeOptions}
                     onChange={handleEntitySubTypeChange}
                     options={entitySubTypeOptions}
                     placeholder="None Selected"
@@ -1047,7 +1039,7 @@ window.open(pdf.output('bloburl'));
                     <input
                       type="text"
                       name="serial"
-                      value={serial}
+                      //value={serial}
                       className=" textsmallnew"
                       onChange={onChange2}
                       required
@@ -1093,7 +1085,7 @@ window.open(pdf.output('bloburl'));
               </label>
               <Select
                 className="selectnew"
-                value={selectedWarehouseOptions}
+                //value={selectedWarehouseOptions}
                 onChange={handleWarehouseChange}
                 options={warehouseOptions}
                 placeholder="None Selected"
@@ -1133,7 +1125,7 @@ window.open(pdf.output('bloburl'));
             <hr></hr>
           </center> */}
           <center>
-             <div class="oneline">
+            <div class="oneline">
               <button
                 type="submit"
                 className="btn btn-primary"

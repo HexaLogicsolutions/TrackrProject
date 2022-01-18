@@ -557,17 +557,26 @@ const ActionGroup = () => {
   const [materialOptions, setMaterialOptions] = useState([]);
   const [selectedMaterialOptions, setSelectedMaterialOptions] = useState([]);
   const [selectedMaterials, setSelectedMaterial] = useState("");
+  
   const loadMaterial = async () => {
-    const result = await axios.get(contextType.dbUrl + "material");
+    // if(AuthContext.materallist!=null && AuthContext.materallist.length>0)
+    //   setMaterialOptions([{ id: "0", value: "", label: "" }].concat(AuthContext.materallist));
 
-    let materialFromAPI = result.data.map((mat) => {
-      return { value: mat.mat_code, label: mat.mat_name, id: mat._id };
-    });
-    console.log(materialFromAPI);
-    setMaterialOptions(
-      [{ id: "0", value: "", label: "" }].concat(materialFromAPI)
-    );
+    // else{
+        const result = await axios.get(contextType.dbUrl + "material");
+    
+        let materialFromAPI = result.data.map((mat) => {
+          return { value: mat.mat_code, label: mat.mat_name, id: mat._id };
+        });
+        console.log(materialFromAPI);
+        setMaterialOptions(
+          [{ id: "0", value: "", label: "" }].concat(materialFromAPI)
+        );
+    //      AuthContext.setmateriallist(materialFromAPI) ;
+    // }
+
   };
+  
   useEffect(() => {
     let myCode = "";
     console.log("useEffect -01");
