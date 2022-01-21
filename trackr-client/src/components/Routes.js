@@ -5,7 +5,7 @@ import { login } from "../actions/auth";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import About from "../pages/About";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import UserList from "../pages/UserList";
 import User from "../pages/User";
@@ -38,11 +38,11 @@ import SalesRepRedirect from "../redirects/SalesRepRedirect";
 import StockRepRedirect from "../redirects/StockRepRedirect";
 import HandheldRepRedirect from "../redirects/HandheldRepRedirect";
 
-
 import Search from "../pages/Search";
 import Sale from "../components/Sale";
 import ActionDemo from "../pages/ActionDemo";
 import { ReportViewer } from "../pages/ReportViewer";
+import Sresult from "./Sresult";
 
 // import TicketsComponent from "../pages/TicketComponent";
 
@@ -71,20 +71,35 @@ class Routes extends Component {
       <Router>
         <AppNavbar />
         <div>
-        <Helmet>
-            <title>TrackR (Ver:{this.context. APP_VERSION})</title>
+          <Helmet>
+            <title>TrackR (Ver:{this.context.APP_VERSION})</title>
             <meta name="description" content="Nested component" />
-        </Helmet>
+          </Helmet>
           <Switch>
             <Route exact path="/" component={Login} />
+
             <Menu />
           </Switch>
+          
+
           <PrivateRoute exact path="/Sale" component={Sale} />
           <PrivateRoute exact path="/pdfdemo" component={pdfdemo} />
           <PrivateRoute exact path="/ReportViewer" component={ReportViewer} />
-          <PrivateRoute exact path="/SalesRepRedirect" component={SalesRepRedirect} />
-          <PrivateRoute exact path="/StockRepRedirect" component={StockRepRedirect} />
-          <PrivateRoute exact path="/HandheldRepRedirect" component={HandheldRepRedirect} />
+          <PrivateRoute
+            exact
+            path="/SalesRepRedirect"
+            component={SalesRepRedirect}
+          />
+          <PrivateRoute
+            exact
+            path="/StockRepRedirect"
+            component={StockRepRedirect}
+          />
+          <PrivateRoute
+            exact
+            path="/HandheldRepRedirect"
+            component={HandheldRepRedirect}
+          />
           <PrivateRoute exact path="/Search" component={Search} />
           <PrivateRoute exact path="/Demo" component={Demo} />
           <PrivateRoute exact path="/ActionDemo" component={ActionDemo} />
@@ -128,6 +143,7 @@ class Routes extends Component {
           <PrivateRoute exact path="/EntityStatus" component={EntityStatus} />
           <PrivateRoute exact path="/EntityList" component={EntityList} />
           <PrivateRoute exact path="/Entity" component={Entity} />
+
           {/* <PrivateRoute exact path="/Reports" component={Reports} /> */}
           {/* <Route exact path="/user" render={(props) => (<PrivateRoute component={User} />)} /> */}
           {/* <PrivateRoute exact path="/user" render={(props) => (<User {...props} userCode={'GM03'} />  )} /> */}

@@ -14,7 +14,7 @@ router.post("/", (req, res) => {
   console.log(name);
   console.log(active);
 
-  if (!code || !name || !email || !password || !group || !active) {
+  if (!code || !name || !email || !password || !group ) {
     res.json({ success: false, msg: "please enter all the data" });
   }
   User.findOne({ usr_code: code }).then((user) => {

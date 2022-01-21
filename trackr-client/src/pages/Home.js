@@ -77,21 +77,42 @@ class Home extends Component {
   };
 
   setDefaultDate = () => {
-    var date = new Date();
+    // var demoMode = true;
+    // if (demoMode) {
+      var date = new Date();
 
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
+      var demoday = date.getDate() - 7;
+      var day = date.getDate();
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
 
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
+      if (month < 10) month = "0" + month;
+      if (day < 10) day = "0" + day;
+      if (demoday < 10) demoday = "0" + demoday;
 
-    var today = year + "-" + month + "-" + day;
-    this.setState({ fromDate: today + "T00:00:00.000Z" });
-    this.setState({ toDate: today + "T23:59:59.000Z" });
-    this.setState({ myFromDate: today });
-    this.setState({ myToDate: today }, () => this.refresh());
+      var today = year + "-" + month + "-" + day;
+      var demo_day = year + "-" + month + "-" + demoday;
 
+      this.setState({ fromDate: demo_day + "T00:00:00.000Z" });
+      this.setState({ toDate: today + "T23:59:59.000Z" });
+      this.setState({ myFromDate: demo_day });
+      this.setState({ myToDate: today }, () => this.refresh());
+    // } else {
+    //   var date = new Date();
+
+    //   var day = date.getDate();
+    //   var month = date.getMonth() + 1;
+    //   var year = date.getFullYear();
+
+    //   if (month < 10) month = "0" + month;
+    //   if (day < 10) day = "0" + day;
+
+    //   var today = year + "-" + month + "-" + day;
+    //   this.setState({ fromDate: today + "T00:00:00.000Z" });
+    //   this.setState({ toDate: today + "T23:59:59.000Z" });
+    //   this.setState({ myFromDate: today });
+    //   this.setState({ myToDate: today }, () => this.refresh());
+    // }
     // setMyFromDate(today);
   };
 
