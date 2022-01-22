@@ -23,7 +23,9 @@ router.post("/", (req, res) => {
     location,
     lastseen,
     duration,
+    price,
   } = req.body;
+  console.log("Your price is :"+price);
   if (!code || !desc) {
     res.json({ success: false, msg: "Please enter all the data" });
   }
@@ -50,6 +52,7 @@ router.post("/", (req, res) => {
       ent_purity: purity,
       ent_lastseen: lastseen,
       ent_duration: duration,
+      ent_price:price
     });
     newEntity
       .save()
@@ -237,6 +240,7 @@ router.put("/", (req, res) => {
     purity,
     lastseen,
     duration,
+    price,
   } = req.body;
   Entity.findOne({ ent_code: code }).then((entity) => {
     if (!entity) {
@@ -261,6 +265,7 @@ router.put("/", (req, res) => {
           ent_purity: purity,
           ent_lastseen: lastseen,
           ent_duration: duration,
+          ent_price:price
         },
       }
     )

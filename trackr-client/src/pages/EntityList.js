@@ -267,6 +267,8 @@ const EntityList = () => {
                   <td style={{ verticalAlign: "middle" }}>
                   {"₹ "}
                   {entity.ent_price.toLocaleString('en-IN')}
+                  
+                  {/* {entity.ent_price} */}
                     
                   </td>
                   <td style={{ verticalAlign: "middle" }}>{entity.ent_desc}</td>

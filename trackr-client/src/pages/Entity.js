@@ -6,12 +6,14 @@ import { updateEntity } from "../actions/auth";
 
 class Entity extends Component {
   static contextType = AuthContext;
+  
 
   constructor(props) {
     super(props);
     this.handleBack = this.handleBack.bind(this);
     // this.inputRef= React.createRef();
     this.myRefs = [];
+
 
     this.state = {
       types: [],
@@ -38,8 +40,8 @@ class Entity extends Component {
       location: "",
       weight: "",
       purity: "",
-      lastseen: "",
-      duration: "",
+      lastseen: Date().toLocaleString(),
+      duration: 0,
       variant: "",
       msg: "",
       editEntity: false,
@@ -101,8 +103,8 @@ class Entity extends Component {
       location: "",
       weight: "",
       purity: "",
-      lastseen: "",
-      duration: "",
+      lastseen: Date().toLocaleString(),
+      duration: 0,
     });
   }
 
@@ -320,7 +322,7 @@ class Entity extends Component {
       });
       return false;
     }
-   
+
     if (isNaN(this.state.purity)) {
       this.setState({
         msg: "Purity should always be a number",
@@ -556,7 +558,7 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ extcode: event.target.value });
                           }}
-                          required 
+                          required
                         />
                       </div>
                     </span>
@@ -576,7 +578,6 @@ class Entity extends Component {
                             onChange={(event) => {
                               this.setState({ epc: event.target.value });
                             }}
-                            
                           />
                         </div>
                       </span>
@@ -649,7 +650,6 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ epc: event.target.value });
                           }}
-                          
                         />
                       </div>
                     </span>
@@ -683,7 +683,6 @@ class Entity extends Component {
                           name="type"
                           value={this.state.type}
                           onChange={this.onTypeChange}
-                          
                         >
                           {this.state.types.map((ett) => (
                             <option key={ett.id} value={ett.value}>
@@ -703,7 +702,6 @@ class Entity extends Component {
                           name="subtype"
                           value={this.state.subtype}
                           onChange={this.onChange}
-                          
                         >
                           {this.state.selectedSubtypes.map((est) => (
                             <option key={est.id} value={est.value}>
@@ -753,7 +751,7 @@ class Entity extends Component {
                       </div>
                     </span>
                   </div>
-                  
+
                   <div className="form-group">
                     <label className="labelstd">Location:</label>
                     <span className="myspan">
@@ -788,7 +786,6 @@ class Entity extends Component {
                             onChange={(event) => {
                               this.setState({ weight: event.target.value });
                             }}
-                            
                           />
                         </div>
                       </span>
@@ -809,7 +806,6 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ purity: event.target.value });
                           }}
-                          
                         />
                       </div>
                     </span>
@@ -818,14 +814,13 @@ class Entity extends Component {
                     <label className="labelstd">Price(₹):</label>
                     <span className="myspan">
                       <div className="form__div">
-
                         <input
                           className="detail__input text150"
                           type="text"
                           name="price"
                           // type={this.state.editUser ? 'hidden': 'text'}
-                       
-                          value={this.state.price.toLocaleString('en-IN')}
+
+                          value={this.state.price}
                           onChange={(event) => {
                             this.setState({ price: event.target.value });
                           }}
@@ -850,7 +845,6 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ lastseen: event.target.value });
                           }}
-                          
                           readOnly
                         />
                       </div>
@@ -874,7 +868,6 @@ class Entity extends Component {
                           onChange={(event) => {
                             this.setState({ duration: event.target.value });
                           }}
-                          
                           readOnly
                         />
                       </div>

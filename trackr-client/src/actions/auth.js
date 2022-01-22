@@ -55,10 +55,10 @@ export const addUser = (user, callback) => {
 
 export const addEntity = (entity, callback) => {
 
-    const {code, extcode,epc,desc,serial,material,type,subtype,brand,status,location,weight,purity,lastseen,duration} = entity;
+    const {code, extcode,epc,desc,serial,material,type,subtype,brand,status,location,weight,purity,lastseen,duration,price} = entity;
 
     //Request body
-    const body = JSON.stringify({code, extcode,epc,desc,serial,material,type,subtype,brand,weight,purity,status,location,lastseen,duration})
+    const body = JSON.stringify({code, extcode,epc,desc,serial,material,type,subtype,brand,weight,purity,status,location,lastseen,duration,price})
 
     axios
         .post('/api/entity', body, config)
@@ -286,10 +286,10 @@ export const updateUser = (user, callback) => {
 
 export const updateEntity = (entity, callback) => {
 
-    const {code, extcode,epc,desc,serial, material,type,subtype,brand,status,location,weight,purity,lastseen,duration} = entity;
+    const {code, extcode,epc,desc,serial, material,type,subtype,brand,status,location,weight,purity,lastseen,duration,price} = entity;
 
     //Request body
-    const body = JSON.stringify({code, extcode,epc,desc,serial,material,type,subtype,brand,weight,purity,status,location,lastseen,duration})
+    const body = JSON.stringify({code, extcode,epc,desc,serial,material,type,subtype,brand,weight,purity,status,location,lastseen,duration,price})
 
     axios
         .put('/api/entity', body, config)
