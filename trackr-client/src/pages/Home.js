@@ -22,6 +22,7 @@ import { Doughnut } from "react-chartjs-2";
 import PieCurrentItemByStatus from "../components/PieCurrentItemByStatus";
 import BarHandheldScan from "../components/BarHandheldScan";
 import BarHandheldInduction from "../components/BarHandheldInduction";
+import DataHelper from "../util/DateHelper";
 
 class Home extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Home extends Component {
       myToDate: "",
       fromDate: "",
       toDate: "",
+
 
       BarSaleQuantityByMaterialLabels: [],
       BarSaleQuantityByMaterialData: [],
@@ -76,44 +78,22 @@ class Home extends Component {
     this.drawBarHandheldInduction();
   };
 
-  setDefaultDate = () => {
-    // var demoMode = true;
-    // if (demoMode) {
-      var date = new Date();
+  setDefaultDate = () => { 
 
-      var demoday = date.getDate() - 7;
-      var day = date.getDate();
-      var month = date.getMonth() + 1;
-      var year = date.getFullYear();
+    var currDate = new Date();
+    var fromDate = new Date();
 
-      if (month < 10) month = "0" + month;
-      if (day < 10) day = "0" + day;
-      if (demoday < 10) demoday = "0" + demoday;
+    // subtract 7 days from current date
+    fromDate.setDate(currDate.getDate() - 7);
 
-      var today = year + "-" + month + "-" + day;
-      var demo_day = year + "-" + month + "-" + demoday;
+    // console.log("DATE", fromDate);
 
-      this.setState({ fromDate: demo_day + "T00:00:00.000Z" });
-      this.setState({ toDate: today + "T23:59:59.000Z" });
-      this.setState({ myFromDate: demo_day });
-      this.setState({ myToDate: today }, () => this.refresh());
-    // } else {
-    //   var date = new Date();
+    this.setState({ fromDate: DataHelper.getStartOfDate(fromDate) });
+    this.setState({ toDate: DataHelper.getEndOfDate(currDate) });
+    //this.setState({ myFromDate: formatDate(fromDate) });
+    this.setState({ myFromDate: DataHelper.formatDate(fromDate) });
+    this.setState({ myToDate: DataHelper.formatDate(currDate) }, () => this.refresh());
 
-    //   var day = date.getDate();
-    //   var month = date.getMonth() + 1;
-    //   var year = date.getFullYear();
-
-    //   if (month < 10) month = "0" + month;
-    //   if (day < 10) day = "0" + day;
-
-    //   var today = year + "-" + month + "-" + day;
-    //   this.setState({ fromDate: today + "T00:00:00.000Z" });
-    //   this.setState({ toDate: today + "T23:59:59.000Z" });
-    //   this.setState({ myFromDate: today });
-    //   this.setState({ myToDate: today }, () => this.refresh());
-    // }
-    // setMyFromDate(today);
   };
 
   drawBarSaleQuantityByMaterial = () => {
@@ -527,8 +507,9 @@ class Home extends Component {
                 type="date"
                 // id="theDate"
                 defaultValue={this.state.myFromDate}
-                className="dateinput"
-                onChange={this.fromdate}
+              //value={this.state.myNewFromDate}
+              // className="dateinput"
+              // onChange={this.fromdate}
               />
               <label
                 htmlFor="To"
@@ -736,5 +717,27 @@ class Home extends Component {
     );
   }
 }
+
+// function formatDate(date) {
+//   var d = new Date(date),
+//     month = '' + (d.getMonth() + 1),
+//     day = '' + d.getDate(),
+//     year = d.getFullYear();
+
+//   if (month.length < 2)
+//     month = '0' + month;
+//   if (day.length < 2)
+//     day = '0' + day;
+
+//   return [year, month, day].join('-');
+// }
+
+// function getStartOfDate(date) {
+//   return formatDate(date) + "T00:00:00.000Z";
+// }
+
+// function getEndOfDate(date) {
+//   return formatDate(date) + "T23:59:59.000Z";
+// }
 
 export default Home;

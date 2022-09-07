@@ -33,7 +33,7 @@ mongoose
         useCreateIndex : true,
         useUnifiedTopology : true
     })
-    .then(() => console.log('Database is connected...'))
+    .then(() => console.log('Database is connected...'+ db.path))
     .catch(err => console.log('Database connection error : '+err))
 
     // app.get('/',(req,res)=>

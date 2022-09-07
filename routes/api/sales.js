@@ -15,6 +15,34 @@ router.get("/", (req, res) => {
       console.log(err);
     });
 });
+//
+// router.get("/updateDate", (req, res) => {
+//   Sale.findOne({ sal_entity: "20001"  }).then((sale) => {
+//     Sale.updateOne(
+//       { sal_entity: "20001" },
+//       // {
+//       //   $set: {
+//       //     sal_date: { // 18 minutes ago (from now)
+//       //       $gt: new Date(sal_date.getTime() - 1000 * 60 * 18)
+//       //   }
+        
+//       //   },
+        
+//       // },
+//       { $set: { sal_date: sale.sal_date-(1000 * 60 * 18)} }
+//     )
+//       .then((resp) => {
+//         console.log("success");
+//         res.json("Date is updated");
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         if (err) {
+//           throw err;
+//         }
+//       });
+//     });
+// });
 
 router.get("/sale-quantity-by-material", (req, res) => {
   console.log("in sale-quantity-by-materialxxx()");
